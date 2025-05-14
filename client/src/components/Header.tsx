@@ -16,9 +16,9 @@ const Header = () => {
       }
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
@@ -40,28 +40,40 @@ const Header = () => {
     { path: "/activites", label: "Activités" },
     { path: "/evenements", label: "Événements" },
     { path: "/galerie", label: "Galerie" },
-    { path: "/contact", label: "Contact" }
+    { path: "/contact", label: "Contact" },
   ];
 
   return (
-    <header className={`bg-primary sticky top-0 z-50 ${scrolled ? 'shadow-md' : ''}`}>
+    <header
+      className={`bg-primary sticky top-0 z-50 ${scrolled ? "shadow-md" : ""}`}
+    >
       <div className="container mx-auto px-4 md:px-6 py-4">
         <div className="flex items-center justify-between">
           <div className="flex items-center">
-            <Link href="/">
-              <span className="mr-2 text-white font-lora font-bold text-2xl md:text-3xl cursor-pointer">
+            <Link
+              href="/"
+              className="flex items-center space-x-2 cursor-pointer"
+            >
+              <img
+                src="../../logo-nasri.jpg"
+                alt="Logo"
+                className="h-10 w-10 object-contain"
+              />
+              <span className="text-white font-lora font-bold text-2xl md:text-3xl">
                 <span className="text-gold">Dahira Miftahoun</span> Nasri
               </span>
             </Link>
           </div>
-          
+
           {/* Desktop Navigation */}
           <nav className="hidden md:flex space-x-8">
             {navLinks.map((link) => (
               <Link key={link.path} href={link.path}>
-                <span 
+                <span
                   className={`font-medium transition cursor-pointer ${
-                    isActive(link.path) ? 'text-gold' : 'text-white hover:text-gold-light'
+                    isActive(link.path)
+                      ? "text-gold"
+                      : "text-white hover:text-gold-light"
                   }`}
                 >
                   {link.label}
@@ -69,11 +81,11 @@ const Header = () => {
               </Link>
             ))}
           </nav>
-          
+
           {/* Mobile Navigation Button */}
           <div className="md:hidden">
-            <button 
-              onClick={toggleMobileMenu} 
+            <button
+              onClick={toggleMobileMenu}
               className="text-gold focus:outline-none hover:text-gold-light"
               aria-label="Toggle Menu"
             >
@@ -81,17 +93,23 @@ const Header = () => {
             </button>
           </div>
         </div>
-        
+
         {/* Mobile Navigation Menu */}
         {mobileMenuOpen && (
           <div className="md:hidden mt-4 pb-2">
             <nav className="flex flex-col space-y-3">
               {navLinks.map((link, index) => (
                 <Link key={link.path} href={link.path}>
-                  <span 
+                  <span
                     className={`font-medium transition py-2 cursor-pointer ${
-                      index < navLinks.length - 1 ? 'border-b border-gray-200/30' : ''
-                    } ${isActive(link.path) ? 'text-gold' : 'text-white hover:text-gold-light'}`}
+                      index < navLinks.length - 1
+                        ? "border-b border-gray-200/30"
+                        : ""
+                    } ${
+                      isActive(link.path)
+                        ? "text-gold"
+                        : "text-white hover:text-gold-light"
+                    }`}
                     onClick={closeMobileMenu}
                   >
                     {link.label}

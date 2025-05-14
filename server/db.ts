@@ -175,15 +175,16 @@ async function initializeDefaultData() {
     // @ts-ignore
     if (activitiesCount[0].count === 0) {
       // Initialiser les activités
-      await query(`
-        INSERT INTO activities (title, description, icon, schedule) VALUES 
-        ('Étude du Coran', 'Sessions hebdomadaires d\'étude et de récitation du Coran pour tous les âges, dirigées par nos érudits.', 'fa-book', 'Tous les samedis | 16:00 - 18:00'),
-        ('Dhikr Collectif', 'Rassemblement spirituel pour les prières et chants de louange collectifs dans la tradition mouride.', 'fa-pray', 'Vendredi soir | 20:30 - 22:00'),
-        ('Enseignements Religieux', 'Cours sur les enseignements de Cheikh Ahmadou Bamba et la spiritualité mouride.', 'fa-chalkboard-teacher', 'Dimanches | 10:00 - 12:00'),
-        ('Service Communautaire', 'Initiatives de bienfaisance pour aider les membres de la communauté et les personnes dans le besoin.', 'fa-hands-helping', 'Premier samedi du mois | 09:00 - 14:00'),
-        ('École Coranique pour Enfants', 'Cours adaptés aux enfants pour apprendre les bases de l\'islam et les valeurs mourides.', 'fa-child', 'Mercredis & Samedis | 14:00 - 16:00'),
-        ('Groupes d\'Étude', 'Cercles de discussion et d\'étude pour approfondir les connaissances religieuses et spirituelles.', 'fa-users', 'Lundis | 19:00 - 20:30')
-      `);
+     await query(`
+  INSERT INTO activities (title, description, icon, schedule) VALUES 
+  ('Étude du Coran', 'Sessions hebdomadaires d''étude et de récitation du Coran pour tous les âges, dirigées par nos érudits.', 'fa-book', 'Tous les samedis | 16:00 - 18:00'),
+  ('Dhikr Collectif', 'Rassemblement spirituel pour les prières et chants de louange collectifs dans la tradition mouride.', 'fa-pray', 'Vendredi soir | 20:30 - 22:00'),
+  ('Enseignements Religieux', 'Cours sur les enseignements de Cheikh Ahmadou Bamba et la spiritualité mouride.', 'fa-chalkboard-teacher', 'Dimanches | 10:00 - 12:00'),
+  ('Service Communautaire', 'Initiatives de bienfaisance pour aider les membres de la communauté et les personnes dans le besoin.', 'fa-hands-helping', 'Premier samedi du mois | 09:00 - 14:00'),
+  ('École Coranique pour Enfants', 'Cours adaptés aux enfants pour apprendre les bases de l''islam et les valeurs mourides.', 'fa-child', 'Mercredis & Samedis | 14:00 - 16:00'),
+  ('Groupes d''Étude', 'Cercles de discussion et d''étude pour approfondir les connaissances religieuses et spirituelles.', 'fa-users', 'Lundis | 19:00 - 20:30')
+`);
+
       log('Activités initialisées', 'database');
     }
     
