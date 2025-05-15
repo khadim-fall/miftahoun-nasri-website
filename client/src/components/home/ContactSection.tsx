@@ -37,7 +37,7 @@ const ContactSection = ({ fullPage = false }: ContactSectionProps) => {
 
   const contactMutation = useMutation({
     mutationFn: (data: ContactFormData) => {
-      return apiRequest("POST", "/api/contact", data);
+      return new Promise((resolve) => setTimeout(resolve, 1000));
     },
     onSuccess: () => {
       toast({
@@ -75,7 +75,7 @@ const ContactSection = ({ fullPage = false }: ContactSectionProps) => {
         )}
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-          <div>
+          {/* <div>
             <h3 className="text-2xl font-lora font-semibold text-primary mb-6">Envoyez-nous un message</h3>
             <Form {...form}>
               <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
@@ -162,7 +162,7 @@ const ContactSection = ({ fullPage = false }: ContactSectionProps) => {
                 </Button>
               </form>
             </Form>
-          </div>
+          </div> */}
           
           <div>
             <h3 className="text-2xl font-lora font-semibold text-primary mb-6">Informations de Contact</h3>

@@ -11,7 +11,7 @@ const NewsletterSection = () => {
 
   const newsletterMutation = useMutation({
     mutationFn: (data: NewsletterFormData) => {
-      return apiRequest("POST", "/api/newsletter", data);
+       return new Promise((resolve) => setTimeout(resolve, 1000));
     },
     onSuccess: () => {
       toast({

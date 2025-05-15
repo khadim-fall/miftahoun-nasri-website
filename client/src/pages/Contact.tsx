@@ -108,7 +108,7 @@ const Contact = () => {
 
       <section className="py-16 md:py-24 bg-gray-50">
         <div className="container mx-auto px-4 md:px-6">
-          <div className="text-center mb-12">
+          {/* <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-lora font-bold text-primary mb-4">
               Notre Emplacement
             </h2>
@@ -116,16 +116,15 @@ const Contact = () => {
               Rendez-nous visite à la Dahira Miftahoun Nasri
             </p>
             <div className="w-20 h-1 bg-gold mx-auto mt-4"></div>
-          </div>
+          </div> */}
 
           <div className="max-w-5xl mx-auto">
             {/* Carte (placeholder) */}
-            <div className="h-96 bg-gray-200 mb-8 rounded-lg flex items-center justify-center">
+            {/* <div className="h-96 bg-gray-200 mb-8 rounded-lg flex items-center justify-center">
               <p className="text-gray-500 font-medium">Carte de localisation</p>
-              {/* Dans une implémentation réelle, nous intégrerions ici une carte Google Maps ou similaire */}
-            </div>
+            </div> */}
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {/* <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div className="bg-white rounded-lg shadow-md p-6">
                 <div className="flex items-start">
                   <div className="bg-primary-light rounded-full p-3 text-white mr-4">
@@ -172,12 +171,12 @@ const Contact = () => {
                   </div>
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </section>
 
-      <section className="py-16 md:py-24 bg-white">
+      {/* <section className="py-16 md:py-24 bg-white">
         <div className="container mx-auto px-4 md:px-6">
           <div className="max-w-5xl mx-auto">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
@@ -380,7 +379,7 @@ const Contact = () => {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
     </>
   );
 };
