@@ -16,10 +16,7 @@ const Home = () => {
 
   return (
     <>
-    {/* Logo en haut */}
-     {/*  <div className="w-full bg-white py-4 px-6 flex justify-center items-center shadow-md">
-        <img src={logo} alt="Logo Dahira" className="h-16" />
-      </div> */}
+    
 
       <HeroSection />
       <PrayerTimes />
