@@ -54,11 +54,11 @@ const Header = () => {
               href="/"
               className="flex items-center space-x-2 cursor-pointer"
             >
-              {<img
+              {/* {<img
                 src="../../logo-nasri.jpg"
                 alt="Logo"
                 className="h-10 w-10 object-contain"
-              />}
+              />} */}
               <span className="text-white font-lora font-bold text-2xl md:text-3xl">
                 <span className="text-gold">Dahira Miftahoun</span> Nasri
               </span>
