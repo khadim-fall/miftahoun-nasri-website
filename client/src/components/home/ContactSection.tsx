@@ -190,7 +190,7 @@ const ContactSection = ({ fullPage = false }: ContactSectionProps) => {
           {/* Image à droite */}
           <div className="flex-1">
             <img
-              src="/page-title-bg.jpg" // ← Remplace avec ton chemin
+              src="/logo-nasri.jpg" // ← Remplace avec ton chemin
               alt="Image de contact"
               className="w-full h-auto object-cover"
             />
