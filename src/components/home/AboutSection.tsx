@@ -1,6 +1,6 @@
 import { Link } from "wouter";
 import { CheckCircle } from "lucide-react";
-import pageTitleImg from '../../images/page-title-bg.jpg';
+import pageTitleImg from '../../../public/images/page-title-bg.jpg';
 interface AboutSectionProps {
   fullPage?: boolean;
 }

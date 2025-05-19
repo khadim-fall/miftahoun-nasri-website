@@ -8,7 +8,7 @@ import GallerySection from "@/components/home/GallerySection";
 import NewsletterSection from "@/components/home/NewsletterSection";
 import ContactSection from "@/components/home/ContactSection";
 import { useEffect } from "react";
-import logo from "../images/page-title-bg.jpg";
+import logo from "../../public/images/page-title-bg.jpg";
 const Home = () => {
   useEffect(() => {
     document.title = "Dahira Miftahoun Nasri - Guediawaye-Notaire";

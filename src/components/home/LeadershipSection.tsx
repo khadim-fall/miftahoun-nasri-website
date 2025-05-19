@@ -1,8 +1,8 @@
 import { Facebook, Twitter, Instagram } from "lucide-react";
 import { Leader } from "@/lib/types";
-import imageOussmane from "../../images/membre-3.jpg";
-import imagekhadim from "../../images/khadim-fall.jpg";
-import imageLeader from "../../images/page-title-bg.jpg";
+import imageOussmane from "../../../public/images/membre-3.jpg";
+import imagekhadim from "../../../public/images/khadim-fall.jpg";
+import imageLeader from "../../../public/images/page-title-bg.jpg";
 const LeadershipSection = () => {
   const leaders: Leader[] = [
     {

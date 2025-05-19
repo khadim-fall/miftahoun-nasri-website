@@ -1,5 +1,5 @@
 import { Link } from "wouter";
-import bgImage from '../../images/page-title-bg.jpg';
+import bgImage from '../../../public/images/page-title-bg.jpg';
 const HeroSection = () => {
   return (
     <section id="accueil" className="relative bg-primary text-white">

@@ -1,7 +1,7 @@
 import { Link } from "wouter";
 import { GalleryImage } from "@/lib/types";
 
-import imageDahira from "../../images/page-title-bg.jpg";
+import imageDahira from "../../../public/images/page-title-bg.jpg";
 const GallerySection = () => {
   const galleryImages: GalleryImage[] = [
     {

@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
-import imageDahira from "../../../client/src/images/page-title-bg.jpg";
-import video1 from "../../../public/videos/video-1.mp4";
-import video2 from "../../../public/videos/video-2.mp4";
-import video3 from "../../../public/videos/video-3.mp4";
+const imageDahira = "../../images/page-title-bg.jpg";
+const video1 = "../../public/videos/video-1.mp4";
+const video2 = "/videos/video-2.mp4";
+const video3 = "/videos/video-3.mp4";
+
 interface GalleryImage {
   id: number;
   src: string;
