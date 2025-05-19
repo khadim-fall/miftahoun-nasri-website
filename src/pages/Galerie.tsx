@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 const imageDahira = "../../images/page-title-bg.jpg";
-const video1 = "../../public/videos/video-1.mp4";
-const video2 = "../../public/videos/video-2.mp4";
-const video3 = "../../public/videos/video-3.mp4";
+const video1 = "../../videos/video-1.mp4";
+const video2 = "../../videos/video-2.mp4";
+const video3 = "../../videos/video-3.mp4";
 
 interface GalleryImage {
   id: number;
