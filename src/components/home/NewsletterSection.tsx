@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useMutation } from "@tanstack/react-query";
-import { apiRequest } from "@/lib/queryClient";
+import emailjs from "@emailjs/browser";
 import { useToast } from "@/hooks/use-toast";
 import { NewsletterFormData } from "@/lib/types";
 
@@ -9,14 +9,26 @@ const NewsletterSection = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
 
+  const SERVICE_ID = "service_nasri";
+  const TEMPLATE_ID = "template_vkabwua";
+  const PUBLIC_KEY = "IgrYnt6RaLyZ4gKlx";
+
   const newsletterMutation = useMutation({
-    mutationFn: (data: NewsletterFormData) => {
-       return new Promise((resolve) => setTimeout(resolve, 1000));
+    mutationFn: async (data: NewsletterFormData) => {
+      return await emailjs.send(
+        SERVICE_ID,
+        TEMPLATE_ID,
+        {
+          user_name: data.name,
+          user_email: data.email, // C’est cette adresse qui recevra l’email
+        },
+        PUBLIC_KEY
+      );
     },
     onSuccess: () => {
       toast({
         title: "Inscription réussie",
-        description: "Vous êtes maintenant inscrit à notre newsletter.",
+        description: "Un email de confirmation vous a été envoyé.",
         variant: "default",
       });
       setName("");
@@ -28,7 +40,7 @@ const NewsletterSection = () => {
         description: "Une erreur est survenue lors de l'inscription. Veuillez réessayer.",
         variant: "destructive",
       });
-      console.error(error);
+      console.error("EmailJS Error:", error);
     },
   });
 
@@ -53,7 +65,7 @@ const NewsletterSection = () => {
           <p className="mb-8">
             Abonnez-vous à notre newsletter pour recevoir des mises à jour sur nos événements et activités
           </p>
-          
+
           <form onSubmit={handleSubmit} className="flex flex-col md:flex-row gap-4">
             <input 
               type="text" 
@@ -79,7 +91,7 @@ const NewsletterSection = () => {
               {newsletterMutation.isPending ? "En cours..." : "S'abonner"}
             </button>
           </form>
-          
+
           <p className="text-sm mt-4 text-gray-300">
             En vous abonnant, vous acceptez de recevoir nos communications par email. 
             Vous pouvez vous désabonner à tout moment.
