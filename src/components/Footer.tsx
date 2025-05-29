@@ -113,6 +113,7 @@ const Footer = () => {
           </div>
         </div>
         
+        
         <div className="border-t border-gray-800 pt-8">
           <div className="text-center text-gray-500">
             <p>&copy; {currentYear} Dahira Miftahoun Nasri. Tous droits réservés.</p>

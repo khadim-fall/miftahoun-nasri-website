@@ -90,7 +90,6 @@ const ContactSection = ({ fullPage = false }: ContactSectionProps) => {
         )}
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-
           <div>
             <h3 className="text-2xl font-lora font-semibold text-primary mb-6">
               Informations de Contact
@@ -190,10 +189,21 @@ const ContactSection = ({ fullPage = false }: ContactSectionProps) => {
           {/* Image à droite */}
           <div className="flex-1">
             <img
-              src="/logo-nasri.jpg" // ← Remplace avec ton chemin
-              alt="Image de contact"
-              className="w-full h-auto object-cover"
-            />
+      src="images/page-title-bg.jpg"
+      alt="Photo du siège de notre daara"
+      className="w-full rounded-lg shadow-lg object-cover max-h-96"
+    />
+            <div className="mt-8 h-64 w-full rounded-lg overflow-hidden shadow-lg">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!4v1748543030523!6m8!1m7!1s6CYDT6qZPwPFkz9dfcBT4A!2m2!1d14.7742005239495!2d-17.38952665254646!3f19.8893690421542!4f-0.7589820127834912!5f2.071032434232568"
+                width="100%"
+                height="100%"
+                style={{ border: 0 }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              ></iframe>
+            </div>
           </div>
         </div>
 
