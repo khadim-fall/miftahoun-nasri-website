@@ -1,118 +1,96 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Link, useLocation } from "wouter";
 import { Menu, X } from "lucide-react";
+import { cn } from "@/lib/utils";
+
+const navLinks = [
+  { path: "/", label: "Accueil" },
+  { path: "/a-propos", label: "À propos" },
+  { path: "/activites", label: "Activités" },
+  { path: "/evenements", label: "Événements" },
+  { path: "/galerie", label: "Galerie" },
+  { path: "/contact", label: "Contact" },
+];
 
 const Header = () => {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [location] = useLocation();
+  const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [location] = useLocation();
 
   useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 20) {
-        setScrolled(true);
-      } else {
-        setScrolled(false);
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
+    const onScroll = () => setScrolled(window.scrollY > 20);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const toggleMobileMenu = () => {
-    setMobileMenuOpen(!mobileMenuOpen);
-  };
+  // Ferme le menu mobile à chaque changement de page ou avec la touche Échap
+  useEffect(() => setOpen(false), [location]);
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [open]);
 
-  const closeMobileMenu = () => {
-    setMobileMenuOpen(false);
-  };
-
-  const isActive = (path: string) => {
-    return location === path;
-  };
-
-  const navLinks = [
-    { path: "/", label: "Accueil" },
-    { path: "/a-propos", label: "À propos" },
-    { path: "/activites", label: "Activités" },
-    { path: "/evenements", label: "Événements" },
-    { path: "/galerie", label: "Galerie" },
-    { path: "/contact", label: "Contact" },
-  ];
+  const linkClass = (path: string) =>
+    cn(
+      "font-medium transition-colors",
+      location === path ? "text-gold" : "text-white hover:text-gold-light",
+    );
 
   return (
-    <header
-      className={`bg-primary sticky top-0 z-50 ${scrolled ? "shadow-md" : ""}`}
-    >
-      <div className="container mx-auto px-4 md:px-6 py-4">
+    <header className={cn("sticky top-0 z-50 bg-primary", scrolled && "shadow-md")}>
+      <div className="container mx-auto px-4 py-4 md:px-6">
         <div className="flex items-center justify-between">
-          <div className="flex items-center">
-            <Link
-              href="/"
-              className="flex items-center space-x-2 cursor-pointer"
-            >
-              <span className="text-white font-lora font-bold text-2xl md:text-3xl">
-                <span className="text-gold">Dahira Miftahoun</span> Nasri
-              </span>
-            </Link>
-          </div>
+          <Link href="/" className="font-lora text-2xl font-bold text-white md:text-3xl">
+            <span className="text-gold">Dahira Miftahoun</span> Nasri
+          </Link>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden md:flex space-x-8">
+          <nav aria-label="Navigation principale" className="hidden space-x-8 md:flex">
             {navLinks.map((link) => (
-              <Link key={link.path} href={link.path}>
-                <span
-                  className={`font-medium transition cursor-pointer ${
-                    isActive(link.path)
-                      ? "text-gold"
-                      : "text-white hover:text-gold-light"
-                  }`}
-                >
-                  {link.label}
-                </span>
+              <Link
+                key={link.path}
+                href={link.path}
+                className={linkClass(link.path)}
+                aria-current={location === link.path ? "page" : undefined}
+              >
+                {link.label}
               </Link>
             ))}
           </nav>
 
-          {/* Mobile Navigation Button */}
-          <div className="md:hidden">
-            <button
-              onClick={toggleMobileMenu}
-              className="text-gold focus:outline-none hover:text-gold-light"
-              aria-label="Toggle Menu"
-            >
-              {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-            </button>
-          </div>
+          <button
+            type="button"
+            onClick={() => setOpen((v) => !v)}
+            className="p-2 text-gold hover:text-gold-light md:hidden"
+            aria-label={open ? "Fermer le menu" : "Ouvrir le menu"}
+            aria-expanded={open}
+            aria-controls="mobile-menu"
+          >
+            {open ? <X size={24} aria-hidden="true" /> : <Menu size={24} aria-hidden="true" />}
+          </button>
         </div>
 
-        {/* Mobile Navigation Menu */}
-        {mobileMenuOpen && (
-          <div className="md:hidden mt-4 pb-2">
-            <nav className="flex flex-col space-y-3">
-              {navLinks.map((link, index) => (
-                <Link key={link.path} href={link.path}>
-                  <span
-                    className={`font-medium transition py-2 cursor-pointer ${
-                      index < navLinks.length - 1
-                        ? "border-b border-gray-200/30"
-                        : ""
-                    } ${
-                      isActive(link.path)
-                        ? "text-gold"
-                        : "text-white hover:text-gold-light"
-                    }`}
-                    onClick={closeMobileMenu}
+        {open && (
+          <nav id="mobile-menu" aria-label="Navigation mobile" className="mt-4 pb-2 md:hidden">
+            <ul className="flex flex-col">
+              {navLinks.map((link, i) => (
+                <li
+                  key={link.path}
+                  className={i < navLinks.length - 1 ? "border-b border-white/20" : ""}
+                >
+                  <Link
+                    href={link.path}
+                    className={cn("block py-3", linkClass(link.path))}
+                    aria-current={location === link.path ? "page" : undefined}
                   >
                     {link.label}
-                  </span>
-                </Link>
+                  </Link>
+                </li>
               ))}
-            </nav>
-          </div>
+            </ul>
+          </nav>
         )}
       </div>
     </header>

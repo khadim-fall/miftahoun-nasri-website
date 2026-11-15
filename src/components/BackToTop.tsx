@@ -1,41 +1,30 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { ChevronUp } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 const BackToTop = () => {
-  const [isVisible, setIsVisible] = useState(false);
+  const [visible, setVisible] = useState(false);
 
-  // Show button when page is scrolled down
-  const toggleVisibility = () => {
-    if (window.pageYOffset > 300) {
-      setIsVisible(true);
-    } else {
-      setIsVisible(false);
-    }
-  };
-
-  // Set up scroll event listener
   useEffect(() => {
-    window.addEventListener("scroll", toggleVisibility);
-    return () => window.removeEventListener("scroll", toggleVisibility);
+    const onScroll = () => setVisible(window.scrollY > 300);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
-
-  // Scroll to top function
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth"
-    });
-  };
 
   return (
     <button
-      onClick={scrollToTop}
-      className={`fixed bottom-5 right-5 bg-primary hover:bg-primary-light text-white rounded-full w-12 h-12 flex items-center justify-center shadow-lg transition-all duration-300 z-50 ${
-        isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10 pointer-events-none"
-      }`}
+      type="button"
+      onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+      tabIndex={visible ? 0 : -1}
+      aria-hidden={!visible}
       aria-label="Retour en haut de la page"
+      className={cn(
+        "fixed bottom-5 right-5 z-50 flex h-12 w-12 items-center justify-center rounded-full bg-primary text-white shadow-lg transition-all duration-300 hover:bg-primary-light",
+        visible ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-10 opacity-0",
+      )}
     >
-      <ChevronUp size={24} />
+      <ChevronUp size={24} aria-hidden="true" />
     </button>
   );
 };

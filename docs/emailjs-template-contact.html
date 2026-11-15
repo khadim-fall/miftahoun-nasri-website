@@ -1,0 +1,10 @@
+<!-- Modèle EmailJS pour le formulaire de contact.
+     Variables utilisées : {{from_name}}, {{from_email}}, {{subject}}, {{message}}.
+     Dans EmailJS : "To Email" = sitedahira@gmail.com, "Reply To" = {{reply_to}}. -->
+<div style="font-family: 'Segoe UI', system-ui, sans-serif; font-size: 16px; line-height: 1.6; color: #333; padding: 20px;">
+  <p><strong>Nouveau message reçu via le site</strong></p>
+  <p><strong>De :</strong> {{from_name}} ({{from_email}})</p>
+  <p><strong>Sujet :</strong> {{subject}}</p>
+  <hr style="border: none; border-top: 1px solid #eaeaea;" />
+  <p style="white-space: pre-wrap;">{{message}}</p>
+</div>

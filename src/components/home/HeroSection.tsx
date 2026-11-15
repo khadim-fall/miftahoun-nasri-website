@@ -1,40 +1,31 @@
-import { Link } from "wouter";
-import bgImage from '../../../public/images/page-title-bg.jpg';
-const HeroSection = () => {
-  return (
-    <section id="accueil" className="relative bg-primary text-white">
-      {/* Overlay */}
-      <div className="absolute inset-0 bg-black opacity-50 z-10"></div>
-      
-      {/* Background Image */}
-      <div 
-        className="relative h-[600px] bg-cover bg-center z-0" 
-        style={{ backgroundImage: `url(${bgImage})`}}
-      ></div>
-      
-      {/* Content */}
-      <div className="absolute inset-0 flex items-center justify-center z-20">
-        <div className="text-center px-4 md:px-0">
-          <h1 className="text-4xl md:text-6xl font-lora font-bold mb-4">Dahira Miftahoun Nasri</h1>
-          <p className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto">
-            Une communauté spirituelle dédiée à l'enseignement et à la pratique des valeurs Mourides à Guediawaye-Notaire
-          </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Link href="/a-propos">
-              <a className="bg-gold text-dark font-bold py-3 px-8 rounded-md hover:bg-gold-light transition-colors duration-300 text-lg">
-                Découvrir
-              </a>
-            </Link>
-            <Link href="/contact">
-              <a className="bg-white text-primary font-bold py-3 px-8 rounded-md hover:bg-gray-100 transition-colors duration-300 text-lg">
-                Nous Contacter
-              </a>
-            </Link>
-          </div>
+import { SITE } from "@/config/site";
+import LinkButton from "@/components/LinkButton";
+
+const HeroSection = () => (
+  <section id="accueil" className="relative h-[600px] bg-primary text-white">
+    <img
+      src="/images/page-title-bg.jpg"
+      alt=""
+      className="absolute inset-0 h-full w-full object-cover"
+      decoding="async"
+    />
+    <div className="absolute inset-0 bg-black/50" aria-hidden="true"></div>
+
+    <div className="relative z-10 flex h-full items-center justify-center">
+      <div className="px-4 text-center md:px-0">
+        <h1 className="mb-4 font-lora text-4xl font-bold md:text-6xl">{SITE.name}</h1>
+        <p className="mx-auto mb-8 max-w-3xl text-xl md:text-2xl">{SITE.tagline}</p>
+        <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
+          <LinkButton href="/a-propos" variant="gold" className="px-8 text-lg font-bold">
+            Découvrir
+          </LinkButton>
+          <LinkButton href="/contact" variant="white" className="px-8 text-lg font-bold">
+            Nous Contacter
+          </LinkButton>
         </div>
       </div>
-    </section>
-  );
-};
+    </div>
+  </section>
+);
 
 export default HeroSection;

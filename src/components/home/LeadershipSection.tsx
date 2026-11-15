@@ -1,121 +1,75 @@
-import { Facebook, Twitter, Instagram } from "lucide-react";
-import { Leader } from "@/lib/types";
-import imageOussmane from "../../../public/images/membre-3.jpg";
-import imagekhadim from "../../../public/images/khadim-fall.jpg";
-import imageLeader from "../../../public/images/page-title-bg.jpg";
-const LeadershipSection = () => {
-  const leaders: Leader[] = [
-    {
-      id: 1,
-      name: "Dieuwrine Serigne Ousmane Fall",
-      role: "Président de la Dahira",
-      description:
-        "Coordonne toutes les activités et représente notre congrégation dans la communauté.",
-      image: imageOussmane,
-      socialLinks: {
-        facebook: "#",
-        twitter: "#",
-        instagram: "#",
-      },
-    },
-    {
-      id: 2,
-      name: "Serigne Khadim Fall",
-      role: "Président Culturel",
-      description:
-        "Organise et donne les cours de Coran, Xassida et Xam Xam tous les Dimanches.",
-      image: imagekhadim,
-      socialLinks: {
-        facebook: "#",
-        twitter: "#",
-        instagram: "#",
-      },
-    },
-    {
-      id: 3,
-      name: "Sokhna Rouba Sow",
-      role: "Dieuwrigne sokhna yi",
-      description:
-        "Organise les rencontres pour développer la connaissance religieuse.",
-      image: imageLeader,
-      socialLinks: {
-        facebook: "#",
-        twitter: "#",
-        instagram: "#",
-      },
-    },
-  ];
+import { Facebook, Instagram, Twitter } from "lucide-react";
+import SectionHeading from "@/components/SectionHeading";
+import { leaders } from "@/data/content";
 
-  return (
-    <section className="py-16 md:py-24 bg-white">
-      <div className="container mx-auto px-4 md:px-6">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-lora font-bold text-primary mb-4">
-            Nos Responsables
-          </h2>
-          <p className="text-gray-600 max-w-3xl mx-auto">
-            Découvrez les membres dévoués qui guident notre communauté avec
-            sagesse et compassion
-          </p>
-          <div className="w-20 h-1 bg-gold mx-auto mt-4"></div>
-        </div>
+const initials = (name: string) =>
+  name
+    .split(/\s+/)
+    .filter(Boolean)
+    .slice(-2)
+    .map((w) => w[0]?.toUpperCase())
+    .join("");
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          {leaders.map((leader) => (
-            <div
-              key={leader.id}
-              className="bg-gray-50 rounded-lg shadow-md overflow-hidden transition-transform hover:scale-105"
-            >
-              <div className="h-64 bg-gray-200 relative">
-                {/* Ici, nous remplacerions cela par une vraie image */}
-                <div className="h-64 bg-gray-200 relative" style={{ maxWidth: '100%', overflow: 'hidden' }}>
-                  <img
-                    src={leader.image}
-                    alt={leader.name}
-                    className="w-full h-full object-cover"
-                    style={{ width: '100%', height: 'auto', objectFit: 'contain' }}
-                  />
+const LeadershipSection = () => (
+  <section className="bg-white py-16 md:py-24">
+    <div className="container mx-auto px-4 md:px-6">
+      <SectionHeading
+        title="Nos Responsables"
+        description="Découvrez les membres dévoués qui guident notre communauté avec sagesse et compassion"
+      />
+
+      <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+        {leaders.map((leader) => (
+          <article
+            key={leader.id}
+            className="overflow-hidden rounded-lg bg-gray-50 shadow-md transition-transform hover:scale-105"
+          >
+            <div className="h-64 bg-gray-200">
+              {leader.image ? (
+                <img
+                  src={leader.image}
+                  alt={leader.name}
+                  className="h-full w-full object-cover"
+                  loading="lazy"
+                  decoding="async"
+                />
+              ) : (
+                <div
+                  className="flex h-full w-full items-center justify-center bg-primary-light text-6xl font-lora font-bold text-white"
+                  role="img"
+                  aria-label={leader.name}
+                >
+                  {initials(leader.name)}
                 </div>
-              </div>
-              <div className="p-6">
-                <h3 className="text-xl font-lora font-bold text-primary mb-2">
-                  {leader.name}
-                </h3>
-                <p className="text-gold font-medium mb-3">{leader.role}</p>
-                <p className="text-gray-600 mb-4">{leader.description}</p>
-                <div className="flex space-x-3">
-                  {leader.socialLinks?.facebook && (
-                    <a
-                      href={leader.socialLinks.facebook}
-                      className="text-primary hover:text-gold transition"
-                    >
-                      <Facebook size={18} />
-                    </a>
-                  )}
-                  {leader.socialLinks?.twitter && (
-                    <a
-                      href={leader.socialLinks.twitter}
-                      className="text-primary hover:text-gold transition"
-                    >
-                      <Twitter size={18} />
-                    </a>
-                  )}
-                  {leader.socialLinks?.instagram && (
-                    <a
-                      href={leader.socialLinks.instagram}
-                      className="text-primary hover:text-gold transition"
-                    >
-                      <Instagram size={18} />
-                    </a>
-                  )}
-                </div>
+              )}
+            </div>
+            <div className="p-6">
+              <h3 className="mb-2 font-lora text-xl font-bold text-primary">{leader.name}</h3>
+              <p className="mb-3 font-medium text-gold-dark">{leader.role}</p>
+              <p className="mb-4 text-gray-600">{leader.description}</p>
+              <div className="flex space-x-3">
+                {leader.socialLinks?.facebook && (
+                  <a href={leader.socialLinks.facebook} aria-label={`Facebook de ${leader.name}`} className="text-primary transition hover:text-gold-dark">
+                    <Facebook size={18} aria-hidden="true" />
+                  </a>
+                )}
+                {leader.socialLinks?.twitter && (
+                  <a href={leader.socialLinks.twitter} aria-label={`Twitter de ${leader.name}`} className="text-primary transition hover:text-gold-dark">
+                    <Twitter size={18} aria-hidden="true" />
+                  </a>
+                )}
+                {leader.socialLinks?.instagram && (
+                  <a href={leader.socialLinks.instagram} aria-label={`Instagram de ${leader.name}`} className="text-primary transition hover:text-gold-dark">
+                    <Instagram size={18} aria-hidden="true" />
+                  </a>
+                )}
               </div>
             </div>
-          ))}
-        </div>
+          </article>
+        ))}
       </div>
-    </section>
-  );
-};
+    </div>
+  </section>
+);
 
 export default LeadershipSection;

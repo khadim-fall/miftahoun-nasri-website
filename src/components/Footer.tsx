@@ -1,123 +1,92 @@
 import { Link } from "wouter";
-import { 
-  Facebook, 
-  Twitter, 
-  Instagram, 
-  Youtube, 
-  MapPin, 
-  Phone, 
-  Mail 
-} from "lucide-react";
+import { Mail, MapPin, Phone } from "lucide-react";
+import { SITE } from "@/config/site";
+import { PRAYER_NAMES, PRAYER_ORDER } from "@/lib/prayer";
+import { usePrayerTimes } from "@/hooks/usePrayerTimes";
+import SocialLinks from "./SocialLinks";
 
-const Footer = () => {
-  const currentYear = new Date().getFullYear();
-  
-  const prayerTimes =[
-  { name: "الفجر", time: "05:30" },
-  { name: "الظهر", time: "13:15" },
-  { name: "العصر", time: "16:30" },
-  { name: "المغرب", time: "19:05" },
-  { name: "العشاء", time: "20:30" }
+const quickLinks = [
+  { path: "/", label: "Accueil" },
+  { path: "/a-propos", label: "À propos" },
+  { path: "/activites", label: "Activités" },
+  { path: "/evenements", label: "Événements" },
+  { path: "/galerie", label: "Galerie" },
+  { path: "/contact", label: "Contact" },
 ];
 
+const Footer = () => {
+  const { times, status } = usePrayerTimes();
+
   return (
-    <footer className="bg-dark text-white pt-16 pb-8">
+    <footer className="bg-dark pb-8 pt-16 text-white">
       <div className="container mx-auto px-4 md:px-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
+        <div className="mb-12 grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-4">
           <div>
-            <h3 className="text-2xl font-lora font-bold mb-6">Miftahoun Nasri</h3>
-            <p className="text-gray-400 mb-6">
-              Une communauté spirituelle dédiée à l'enseignement et à la pratique 
-              des valeurs Mourides à Guediawaye-Notaire.
-            </p>
-            <div className="flex space-x-4">
-              <a href="#" className="text-white hover:text-gold transition-colors duration-300" aria-label="Facebook">
-                <Facebook size={18} />
-              </a>
-              <a href="#" className="text-white hover:text-gold transition-colors duration-300" aria-label="Twitter">
-                <Twitter size={18} />
-              </a>
-              <a href="#" className="text-white hover:text-gold transition-colors duration-300" aria-label="Instagram">
-                <Instagram size={18} />
-              </a>
-              <a href="#" className="text-white hover:text-gold transition-colors duration-300" aria-label="Youtube">
-                <Youtube size={18} />
-              </a>
-            </div>
+            <h3 className="mb-6 font-lora text-2xl font-bold">{SITE.shortName}</h3>
+            <p className="mb-6 text-gray-400">{SITE.tagline}.</p>
+            <SocialLinks linkClassName="text-white transition-colors duration-300 hover:text-gold" />
           </div>
-          
-          <div>
-            <h3 className="text-xl font-lora font-bold mb-6">Liens Rapides</h3>
+
+          <nav aria-label="Liens rapides">
+            <h3 className="mb-6 font-lora text-xl font-bold">Liens Rapides</h3>
             <ul className="space-y-3">
-              <li>
-                <Link href="/">
-                  <a className="text-gray-400 hover:text-gold transition-colors duration-300">Accueil</a>
-                </Link>
-              </li>
-              <li>
-                <Link href="/a-propos">
-                  <a className="text-gray-400 hover:text-gold transition-colors duration-300">À propos</a>
-                </Link>
-              </li>
-              <li>
-                <Link href="/activites">
-                  <a className="text-gray-400 hover:text-gold transition-colors duration-300">Activités</a>
-                </Link>
-              </li>
-              <li>
-                <Link href="/evenements">
-                  <a className="text-gray-400 hover:text-gold transition-colors duration-300">Événements</a>
-                </Link>
-              </li>
-              <li>
-                <Link href="/galerie">
-                  <a className="text-gray-400 hover:text-gold transition-colors duration-300">Galerie</a>
-                </Link>
-              </li>
-              <li>
-                <Link href="/contact">
-                  <a className="text-gray-400 hover:text-gold transition-colors duration-300">Contact</a>
-                </Link>
-              </li>
-            </ul>
-          </div>
-          
-          <div>
-            <h3 className="text-xl font-lora font-bold mb-6">Horaires de Prière</h3>
-            <ul className="space-y-3">
-              {prayerTimes.map((prayer) => (
-                <li key={prayer.name} className="flex justify-between">
-                  <span className="text-gray-400">{prayer.name}</span>
-                  <span className="text-gold">{prayer.time}</span>
+              {quickLinks.map((l) => (
+                <li key={l.path}>
+                  <Link
+                    href={l.path}
+                    className="text-gray-400 transition-colors duration-300 hover:text-gold"
+                  >
+                    {l.label}
+                  </Link>
                 </li>
               ))}
             </ul>
-          </div>
-          
+          </nav>
+
           <div>
-            <h3 className="text-xl font-lora font-bold mb-6">Contact</h3>
+            <h3 className="mb-6 font-lora text-xl font-bold">Horaires de Prière</h3>
+            <ul className="space-y-3">
+              {PRAYER_ORDER.map((key) => (
+                <li key={key} className="flex justify-between">
+                  <span lang="ar" dir="rtl" className="text-gray-400">
+                    {PRAYER_NAMES[key].ar}
+                  </span>
+                  <span className="text-gold">{times ? times[key] : "--:--"}</span>
+                </li>
+              ))}
+            </ul>
+            {status === "fallback" && (
+              <p className="mt-3 text-xs text-gray-400">Horaires indicatifs (calcul en ligne indisponible).</p>
+            )}
+          </div>
+
+          <div>
+            <h3 className="mb-6 font-lora text-xl font-bold">Contact</h3>
             <ul className="space-y-3">
               <li className="flex items-start">
-                <MapPin className="text-gold mt-1 mr-3" size={18} />
-                <span className="text-gray-400">Quartier Notaire, Guediawaye, Dakar, Sénégal</span>
+                <MapPin className="mr-3 mt-1 shrink-0 text-gold" size={18} aria-hidden="true" />
+                <span className="text-gray-400">{SITE.addressShort}</span>
               </li>
               <li className="flex items-start">
-                <Phone className="text-gold mt-1 mr-3" size={18} />
-                <span className="text-gray-400">+221 77 762 18 06</span>
+                <Phone className="mr-3 mt-1 shrink-0 text-gold" size={18} aria-hidden="true" />
+                <a href={`tel:${SITE.phones[0].tel}`} className="text-gray-400 hover:text-gold">
+                  {SITE.phones[0].display}
+                </a>
               </li>
               <li className="flex items-start">
-                <Mail className="text-gold mt-1 mr-3" size={18} />
-                <span className="text-gray-400">sitedahira@gmail.com</span>
+                <Mail className="mr-3 mt-1 shrink-0 text-gold" size={18} aria-hidden="true" />
+                <a href={`mailto:${SITE.emails[0]}`} className="break-all text-gray-400 hover:text-gold">
+                  {SITE.emails[0]}
+                </a>
               </li>
             </ul>
           </div>
         </div>
-        
-        
-        <div className="border-t border-gray-800 pt-8">
-          <div className="text-center text-gray-500">
-            <p>&copy; {currentYear} Dahira Miftahoun Nasri. Tous droits réservés.</p>
-          </div>
+
+        <div className="border-t border-gray-800 pt-8 text-center text-gray-500">
+          <p>
+            &copy; {new Date().getFullYear()} {SITE.name}. Tous droits réservés.
+          </p>
         </div>
       </div>
     </footer>
