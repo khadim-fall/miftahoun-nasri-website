@@ -15,7 +15,12 @@ const HeroSection = () => {
       {/* Content */}
       <div className="absolute inset-0 flex items-center justify-center z-20">
         <div className="text-center px-4 md:px-0">
-          <h1 className="text-4xl md:text-6xl font-lora font-bold mb-4">دَاهِيرَةُ مِفْتَاحُ النَّصْرِي</h1>
+         <h1
+  dir="rtl"
+  className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold mb-6 leading-relaxed text-gold drop-shadow-[0_4px_8px_rgba(0,0,0,0.7)] tracking-wide"
+>
+  دَاهِيرَةُ مِفْتَاحُ النَّصْرِي
+</h1>
           <p className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto">
             Une communauté spirituelle dédiée à l'enseignement et à la pratique des valeurs Mourides à Guediawaye-Notaire
           </p>
