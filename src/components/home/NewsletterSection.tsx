@@ -28,8 +28,8 @@ const NewsletterSection = () => {
         title: result === "sent" ? "Inscription réussie" : "Presque terminé",
         description:
           result === "sent"
-            ? "Merci ! Vous recevrez bientôt nos actualités."
-            : "Votre application de messagerie s'ouvre : validez l'envoi du message pré-rempli.",
+            ? "Merci ! Vous recevrez bientôt nos actualités."
+            : "Votre application de messagerie s’ouvre : validez l’envoi du message pré-rempli.",
       });
       setName("");
       setEmail("");
@@ -37,7 +37,7 @@ const NewsletterSection = () => {
       console.error(error);
       toast({
         title: "Erreur",
-        description: `L'inscription a échoué${error instanceof Error ? ` (${error.message})` : ""}. Veuillez réessayer.`,
+        description: `L’inscription a échoué${error instanceof Error ? ` (${error.message})` : ""}. Veuillez réessayer.`,
         variant: "destructive",
       });
     } finally {
@@ -50,10 +50,10 @@ const NewsletterSection = () => {
       <div className="container mx-auto px-4 md:px-6">
         <div className="mx-auto max-w-3xl text-center">
           <h2 id="newsletter-title" className="mb-4 font-lora text-3xl font-bold md:text-4xl">
-            Restez Informé
+            Restez informés
           </h2>
           <p className="mb-8">
-            Abonnez-vous à notre newsletter pour recevoir des mises à jour sur nos événements et activités
+            Abonnez-vous à notre newsletter pour suivre l’actualité de nos événements et de nos activités.
           </p>
 
           <form onSubmit={handleSubmit} className="flex flex-col gap-4 md:flex-row" noValidate>
@@ -71,12 +71,12 @@ const NewsletterSection = () => {
               />
             </label>
             <label className="flex-1">
-              <span className="sr-only">Votre email</span>
+              <span className="sr-only">Votre e-mail</span>
               <input
                 type="email"
                 name="email"
                 autoComplete="email"
-                placeholder="Votre email"
+                placeholder="Votre e-mail"
                 className={fieldClass}
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -88,13 +88,12 @@ const NewsletterSection = () => {
               className="rounded-md bg-gold px-6 py-3 font-bold text-dark transition-colors duration-300 hover:bg-gold-light disabled:opacity-60"
               disabled={sending}
             >
-              {sending ? "En cours..." : "S'abonner"}
+              {sending ? "En cours…" : "S’abonner"}
             </button>
           </form>
 
           <p className="mt-4 text-sm text-gray-200">
-            En vous abonnant, vous acceptez de recevoir nos communications par email. Vous pouvez vous
-            désabonner à tout moment.
+            En vous abonnant, vous acceptez de recevoir nos communications par e-mail. Pour vous désabonner, il suffit de nous le demander via la page Contact.
           </p>
         </div>
       </div>

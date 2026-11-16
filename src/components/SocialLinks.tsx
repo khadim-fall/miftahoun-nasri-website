@@ -9,7 +9,7 @@ const NETWORKS: { key: SocialNetwork; label: string; Icon: LucideIcon }[] = [
   { key: "youtube", label: "YouTube", Icon: Youtube },
 ];
 
-/** N'affiche que les réseaux dont le lien est renseigné dans src/config/site.ts. */
+/** N’affiche que les réseaux dont le lien est renseigné dans src/config/site.ts. */
 const SocialLinks = ({ className, linkClassName }: { className?: string; linkClassName: string }) => {
   const items = NETWORKS.filter((n) => SITE.social[n.key]);
   if (items.length === 0) return null;

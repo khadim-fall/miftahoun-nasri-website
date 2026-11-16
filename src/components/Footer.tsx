@@ -28,7 +28,7 @@ const Footer = () => {
           </div>
 
           <nav aria-label="Liens rapides">
-            <h3 className="mb-6 font-lora text-xl font-bold">Liens Rapides</h3>
+            <h3 className="mb-6 font-lora text-xl font-bold">Liens rapides</h3>
             <ul className="space-y-3">
               {quickLinks.map((l) => (
                 <li key={l.path}>
@@ -44,7 +44,7 @@ const Footer = () => {
           </nav>
 
           <div>
-            <h3 className="mb-6 font-lora text-xl font-bold">Horaires de Prière</h3>
+            <h3 className="mb-6 font-lora text-xl font-bold">Horaires de prière</h3>
             <ul className="space-y-3">
               {PRAYER_ORDER.map((key) => (
                 <li key={key} className="flex justify-between">

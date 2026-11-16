@@ -6,23 +6,23 @@ import { formatDateParts, splitEvents } from "@/lib/events";
 
 const EventsSection = ({ fullPage = false }: { fullPage?: boolean }) => {
   const { upcoming } = splitEvents(events);
-  // Sur l'accueil : les 2 prochains événements ; sur la page dédiée : tous
+  // Sur l’accueil : les 2 prochains événements ; sur la page dédiée : tous
   const displayed = fullPage ? upcoming : upcoming.slice(0, 2);
 
   return (
     <section id="evenements" className="bg-white py-16 md:py-24">
       <div className="container mx-auto px-4 md:px-6">
         <SectionHeading
-          title="Événements à Venir"
+          title="Événements à venir"
           description="Rejoignez-nous pour ces occasions spéciales qui renforcent notre communauté"
         />
 
         {displayed.length === 0 ? (
           <div className="mx-auto max-w-xl rounded-lg bg-gray-50 p-8 text-center shadow-md">
             <CalendarX className="mx-auto mb-3 h-10 w-10 text-primary" aria-hidden="true" />
-            <p className="font-medium text-primary">Aucun événement n'est programmé pour le moment.</p>
+            <p className="font-medium text-primary">Aucun événement n’est programmé pour le moment.</p>
             <p className="mt-2 text-gray-600">
-              Abonnez-vous à la newsletter ou contactez-nous pour être informé des prochaines dates.
+              Abonnez-vous à la newsletter ou contactez-nous pour connaître les prochaines dates.
             </p>
           </div>
         ) : (

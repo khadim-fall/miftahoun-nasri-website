@@ -6,7 +6,7 @@ const GallerySection = () => (
   <section id="galerie" className="bg-gray-50 py-16 md:py-24">
     <div className="container mx-auto px-4 md:px-6">
       <SectionHeading
-        title="Galerie Photos"
+        title="Galerie photos"
         description="Découvrez les moments forts des événements passés de notre dahira"
       />
 

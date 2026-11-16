@@ -3,7 +3,7 @@ import type { MemberFormData, NewsletterFormData } from "./types";
 
 /**
  * Envoi des formulaires vers un Google Sheet via un Google Apps Script (gratuit, sans service tiers).
- * Si SITE.formsEndpoint est vide, on ouvre la messagerie du visiteur (rien n'est faussement "envoyé").
+ * Si SITE.formsEndpoint est vide, on ouvre la messagerie du visiteur (rien n’est faussement "envoyé").
  */
 export type SubmitResult = "sent" | "mailto";
 
@@ -49,7 +49,7 @@ export async function sendMemberForm(data: MemberFormData): Promise<SubmitResult
   if (!SITE.formsEndpoint) {
     openMailClient(
       `Nouveau membre : ${data.firstName} ${data.lastName}`,
-      `Prénom : ${data.firstName}\nNom : ${data.lastName}\nLieu d'habitation : ${data.residence}\nTéléphone : ${data.phone}` +
+      `Prénom : ${data.firstName}\nNom : ${data.lastName}\nLieu d’habitation : ${data.residence}\nTéléphone : ${data.phone}` +
         (data.comment ? `\n\nCommentaire :\n${data.comment}` : ""),
     );
     return "mailto";

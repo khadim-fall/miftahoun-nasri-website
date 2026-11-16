@@ -16,18 +16,18 @@ const PLACEHOLDER_IMAGE = "/images/page-title-bg.jpg";
 export const leaders: Leader[] = [
   {
     id: 1,
-    name: "Dieuwrine Serigne Ousmane Fall",
-    role: "Président de la Dahira",
+    name: "Dieuwrigne Serigne Ousmane Fall",
+    role: "Président de la dahira",
     description:
-      "Coordonne toutes les activités et représente notre congrégation dans la communauté.",
+      "Coordonne toutes les activités et représente la dahira auprès de la communauté.",
     image: "/images/membre-3.jpg",
   },
   {
     id: 2,
     name: "Serigne Khadim Fall",
-    role: "Président Culturel",
+    role: "Président culturel",
     description:
-      "Organise et donne les cours de Coran, Xassida et Xam Xam tous les Dimanches.",
+      "Organise et dispense les cours de Coran, de khassidas et de Xam Xam tous les dimanches.",
     image: "/images/khadim-fall.jpg",
   },
   {
@@ -35,7 +35,7 @@ export const leaders: Leader[] = [
     name: "Sokhna Rouba Sow",
     role: "Dieuwrigne sokhna yi",
     description:
-      "Organise les rencontres pour développer la connaissance religieuse.",
+      "Organise des rencontres pour approfondir la connaissance religieuse.",
     // Pas encore de photo : ajoutez-en une dans public/images puis indiquez son chemin ici.
   },
 ];
@@ -45,49 +45,49 @@ export const activities: Activity[] = [
     id: 1,
     title: "Étude du Coran",
     description:
-      "Sessions hebdomadaires d'étude et de récitation du Coran pour tous les âges, dirigées par Dieuwrigne Ousmane.",
+      "Séances hebdomadaires d’étude et de récitation du Coran, ouvertes à tous les âges et dirigées par Dieuwrigne Ousmane.",
     icon: "book",
-    schedule: "Tous les dimanches | 12:00 - 14:00",
+    schedule: "Tous les dimanches, 12:00 – 14:00",
   },
   {
     id: 2,
-    title: "Drouss - Kourel - Zikroulah",
+    title: "Drouss – Kourel – Zikroulah",
     description:
-      "Rassemblement spirituel pour les prières et chants de louange collectifs dans la tradition mouride.",
+      "Rassemblement spirituel de prières et de chants de louange, dans la tradition mouride.",
     icon: "moon",
-    schedule: "Vendredi soir | 21:00 - 23:30",
+    schedule: "Vendredi soir, 21:00 – 23:30",
   },
   {
     id: 3,
     title: "Wakhtane et sogné",
     description:
-      "Cours sur les enseignements de Cheikh Ahmadou Bamba et la spiritualité mouride.",
+      "Cours sur les enseignements de Cheikh Ahmadou Bamba et sur la spiritualité mouride.",
     icon: "teaching",
-    schedule: "Vendredi soir | 23:30 - 00:00",
+    schedule: "Vendredi soir, 23:30 – 00:00",
   },
   {
     id: 4,
-    title: "Service Communautaire",
+    title: "Service communautaire",
     description:
       "Initiatives de bienfaisance pour aider les membres de la communauté et les personnes dans le besoin.",
     icon: "charity",
-    schedule: "Premier samedi du mois | 09:00 - 14:00",
+    schedule: "Premier samedi du mois, 09:00 – 14:00",
   },
   {
     id: 5,
-    title: "École Coranique pour Enfants",
+    title: "École coranique pour enfants",
     description:
-      "Cours adaptés aux enfants pour apprendre les bases de l'islam et les valeurs mourides.",
+      "Cours adaptés aux enfants pour apprendre les bases de l’islam et les valeurs mourides.",
     icon: "children",
-    schedule: "Mercredis & Samedis | 14:00 - 16:00",
+    schedule: "Mercredis et samedis, 14:00 – 16:00",
   },
   {
     id: 6,
-    title: "Groupes d'Étude",
+    title: "Groupes d’étude",
     description:
-      "Cercles de discussion et d'étude pour approfondir les connaissances religieuses et les thèmes d'actualité.",
+      "Cercles de discussion et d’étude pour approfondir les connaissances religieuses et les thèmes d’actualité.",
     icon: "study",
-    schedule: "Dimanche | 23:30 - 00:00",
+    schedule: "Dimanche, 23:30 – 00:00",
   },
 ];
 
@@ -95,14 +95,14 @@ export const weeklyProgram: WeeklyDay[] = [
   {
     day: "Dimanche",
     slots: [
-      { time: "12:00 - 14:00", label: "École Coranique pour les membres du dahira" },
-      { time: "17:00 - 20:00", label: "École Coranique pour les filles" },
-      { time: "21:00 - 00:00", label: "Répétition Kourel Serigne Massamba" },
+      { time: "12:00 – 14:00", label: "École coranique pour les membres de la dahira" },
+      { time: "17:00 – 20:00", label: "École coranique pour les filles" },
+      { time: "21:00 – 00:00", label: "Répétition du Kourel Serigne Massamba" },
     ],
   },
   {
     day: "Vendredi",
-    slots: [{ time: "21:00 - 00:00", label: "Dahira" }],
+    slots: [{ time: "21:00 – 00:00", label: "Rencontre hebdomadaire de la dahira" }],
   },
 ];
 
@@ -114,39 +114,39 @@ export const weeklyProgram: WeeklyDay[] = [
 export const events: DahiraEvent[] = [
   {
     id: 1,
-    title: "Grand Magal Célébration",
+    title: "Célébration du Grand Magal",
     description:
-      "Commémoration annuelle du départ en exil de Cheikh Ahmadou Bamba avec prières, chants et repas communautaire.",
+      "Commémoration annuelle du départ en exil de Cheikh Ahmadou Bamba avec prières, chants et un repas communautaire.",
     date: "2024-06-15",
     venue: "Dahira Miftahoun Nasri, Guediawaye-Notaire",
-    time: "9:00 - 22:00",
+    time: "09:00 – 22:00",
   },
   {
     id: 2,
-    title: "Conférence Annuelle",
+    title: "Conférence annuelle",
     description:
-      "Conférence sur l'héritage spirituel de Cheikh Ahmadou Bamba avec des intervenants renommés.",
+      "Conférence sur l’héritage spirituel de Cheikh Ahmadou Bamba avec des intervenants renommés.",
     date: "2024-07-22",
-    venue: "Centre Culturel, Guediawaye",
-    time: "14:00 - 18:00",
+    venue: "Centre culturel, Guediawaye",
+    time: "14:00 – 18:00",
   },
   {
     id: 3,
-    title: "Journée Éducative",
+    title: "Journée éducative",
     description:
-      "Séminaire intensif sur les enseignements et la doctrine Mouride pour tous les niveaux.",
+      "Séminaire intensif sur les enseignements et la doctrine mouride pour tous les niveaux.",
     date: "2024-08-05",
     venue: "Dahira Miftahoun Nasri, Guediawaye-Notaire",
-    time: "10:00 - 16:00",
+    time: "10:00 – 16:00",
   },
   {
     id: 4,
-    title: "Action Caritative",
+    title: "Action caritative",
     description:
       "Distribution de repas et de fournitures scolaires aux familles défavorisées de notre communauté.",
     date: "2024-08-19",
-    venue: "Place Publique, Guediawaye-Notaire",
-    time: "9:00 - 13:00",
+    venue: "Place publique, Guediawaye-Notaire",
+    time: "09:00 – 13:00",
   },
   {
     id: 5,
@@ -159,21 +159,21 @@ export const events: DahiraEvent[] = [
     id: 6,
     title: "Séminaire sur le Mouridisme",
     description:
-      "Conférence éducative sur l'histoire et les principes du Mouridisme.",
+      "Conférence éducative sur l’histoire et les principes du Mouridisme.",
     date: "2024-02-28",
   },
   {
     id: 7,
-    title: "Journée de Solidarité",
+    title: "Journée de solidarité",
     description:
-      "Distribution d'aide alimentaire et médicale aux familles défavorisées.",
+      "Distribution d’aide alimentaire et médicale aux familles défavorisées.",
     date: "2024-03-20",
   },
 ];
 
 export const galleryImages: GalleryImage[] = [
   { id: 1, src: PLACEHOLDER_IMAGE, alt: "Célébration religieuse", category: "Événements" },
-  { id: 2, src: PLACEHOLDER_IMAGE, alt: "Séance d'enseignement", category: "Éducation" },
+  { id: 2, src: PLACEHOLDER_IMAGE, alt: "Séance d’enseignement", category: "Éducation" },
   { id: 3, src: PLACEHOLDER_IMAGE, alt: "Distribution de nourriture", category: "Charité" },
   { id: 4, src: PLACEHOLDER_IMAGE, alt: "Lecture du Coran", category: "Spiritualité" },
   { id: 5, src: PLACEHOLDER_IMAGE, alt: "Rassemblement communautaire", category: "Communauté" },

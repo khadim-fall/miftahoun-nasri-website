@@ -7,9 +7,9 @@ export const SITE = {
   shortName: "Miftahoun Nasri",
   locality: "Guediawaye-Notaire",
   tagline:
-    "Une communauté spirituelle dédiée à l'enseignement et à la pratique des valeurs Mourides à Guediawaye-Notaire",
+    "Une communauté spirituelle dédiée à l’enseignement et à la pratique des valeurs mourides à Guediawaye-Notaire",
   description:
-    "Dahira Miftahoun Nasri de Guediawaye-Notaire - Une communauté spirituelle dédiée à l'enseignement et à la pratique des valeurs Mourides",
+    "Dahira Miftahoun Nasri de Guediawaye-Notaire - Une communauté spirituelle dédiée à l’enseignement et à la pratique des valeurs mourides",
 
   address: "Dahira Miftahoun Nasri, Quartier Notaire, Guediawaye, Dakar, Sénégal",
   addressShort: "Quartier Notaire, Guediawaye, Dakar, Sénégal",
@@ -23,13 +23,13 @@ export const SITE = {
   emails: ["sitedahira@gmail.com", "fall.khadim2803@gmail.com"],
 
   hours: [
-    "Vendredi : 20:30 - 00:00",
-    "Dimanche : 12:00 - 14:00 | 17:00 - 00:00",
+    "Vendredi : 20:30 – 00:00",
+    "Dimanche : 12:00 – 14:00 et 17:00 – 00:00",
   ],
 
   /**
    * Réseaux sociaux : renseignez les vraies adresses (https://...).
-   * Une icône n'apparaît que si son lien est rempli (avant, tous les liens pointaient vers "#").
+   * Une icône n’apparaît que si son lien est rempli (avant, tous les liens pointaient vers "#").
    */
   social: {
     facebook: "",
@@ -41,7 +41,7 @@ export const SITE = {
   /**
    * Adresse du script Google (voir docs/google-apps-script.gs et le README) qui enregistre les
    * inscriptions newsletter et les messages dans un Google Sheet.
-   * Tant qu'elle est vide, les formulaires ouvrent la messagerie du visiteur.
+   * Tant qu’elle est vide, les formulaires ouvrent la messagerie du visiteur.
    */
   formsEndpoint:
     "https://script.google.com/macros/s/AKfycbxyvcf9EvYsuUoWlUsqE-G6WHluoneYs4Fr99IoDICr4iqX33SB-fSpJHbykeStv76-/exec",

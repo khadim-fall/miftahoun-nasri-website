@@ -14,7 +14,7 @@ const LeadershipSection = () => (
   <section className="bg-white py-16 md:py-24">
     <div className="container mx-auto px-4 md:px-6">
       <SectionHeading
-        title="Nos Responsables"
+        title="Nos responsables"
         description="Découvrez les membres dévoués qui guident notre communauté avec sagesse et compassion"
       />
 

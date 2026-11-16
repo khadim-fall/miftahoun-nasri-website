@@ -15,7 +15,7 @@ const Evenements = () => {
   return (
     <>
       <PageHeader
-        title="Nos Événements"
+        title="Nos événements"
         description="Découvrez les événements à venir de la Dahira Miftahoun Nasri"
       />
       <EventsSection fullPage />
@@ -23,7 +23,7 @@ const Evenements = () => {
       {main && mainDate && (
         <section className="bg-gray-50 py-16 md:py-24">
           <div className="container mx-auto px-4 md:px-6">
-            <SectionHeading title="Événement Principal" description="Ne manquez pas notre prochain grand événement" />
+            <SectionHeading title="Événement principal" description="Ne manquez pas notre prochain grand événement" />
             <article className="mx-auto max-w-4xl overflow-hidden rounded-lg bg-white shadow-lg md:flex">
               <div className="flex flex-col items-center justify-center bg-primary p-8 text-center text-white md:w-1/3">
                 <Calendar className="mx-auto mb-4 h-12 w-12" aria-hidden="true" />
@@ -57,7 +57,7 @@ const Evenements = () => {
       {past.length > 0 && (
         <section className="bg-white py-16 md:py-24">
           <div className="container mx-auto px-4 md:px-6">
-            <SectionHeading title="Événements Passés" description="Revivez nos événements précédents" />
+            <SectionHeading title="Événements passés" description="Revivez nos événements précédents" />
             <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
               {past.map((event) => (
                 <article key={event.id} className="overflow-hidden rounded-lg bg-gray-50 shadow-md">

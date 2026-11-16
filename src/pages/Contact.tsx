@@ -9,8 +9,8 @@ const Contact = () => {
   return (
     <>
       <PageHeader
-        title="Contactez-Nous"
-        description="Vous avez des questions ou souhaitez rejoindre notre dahira? N'hésitez pas à nous contacter"
+        title="Contactez-nous"
+        description="Une question ou l’envie de rejoindre notre dahira ? N’hésitez pas à nous contacter."
       />
 
       <section className="bg-white py-16 md:py-24">
@@ -19,7 +19,7 @@ const Contact = () => {
             <div>
               <h2 className="mb-6 font-lora text-2xl font-semibold text-primary">Vos informations</h2>
               <p className="mb-6 text-gray-600">
-                Membres de la dahira, renseignez vos coordonnées pour que nous puissions vous joindre.
+                Membres de la dahira, renseignez vos coordonnées pour que nous puissions vous joindre. Vous pouvez aussi nous laisser un commentaire.
               </p>
               <ContactForm />
             </div>

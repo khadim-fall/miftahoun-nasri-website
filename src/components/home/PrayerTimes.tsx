@@ -13,12 +13,12 @@ const PrayerTimes = () => {
         <div className="flex flex-col items-center justify-between rounded-lg bg-primary p-6 shadow-lg md:flex-row md:p-8">
           <div className="mb-6 text-center text-white md:mb-0 md:text-left">
             <h2 id="prayer-title" className="font-lora text-2xl font-bold md:text-3xl">
-              Horaires de Prière
+              Horaires de prière
             </h2>
             <p className="mt-2">Rejoignez-nous pour les prières quotidiennes</p>
             <p className="mt-1 text-sm text-gray-200">
               {status === "live" && `${SITE.prayer.city} · ${formatLongDate(todayKey())}`}
-              {status === "loading" && "Chargement des horaires..."}
+              {status === "loading" && "Chargement des horaires…"}
               {status === "fallback" && "Horaires indicatifs (calcul en ligne indisponible)"}
             </p>
           </div>

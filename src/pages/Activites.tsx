@@ -10,7 +10,7 @@ const Activites = () => {
   return (
     <>
       <PageHeader
-        title="Nos Activités"
+        title="Nos activités"
         description="Découvrez les différentes activités spirituelles et communautaires de la Dahira Miftahoun Nasri"
       />
       <ActivitiesSection fullPage />
@@ -18,7 +18,7 @@ const Activites = () => {
       <section className="bg-white py-16 md:py-24">
         <div className="container mx-auto px-4 md:px-6">
           <SectionHeading
-            title="Programmes Hebdomadaires"
+            title="Programme hebdomadaire"
             description="Rejoignez-nous pour nos activités régulières"
           />
 

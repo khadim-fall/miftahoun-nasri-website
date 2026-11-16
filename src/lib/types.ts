@@ -11,7 +11,7 @@ export interface Leader {
   name: string;
   role: string;
   description: string;
-  /** Chemin d'une photo (ex. "/images/membre-3.jpg"). Sans photo, les initiales sont affichées. */
+  /** Chemin d’une photo (ex. "/images/membre-3.jpg"). Sans photo, les initiales sont affichées. */
   image?: string;
   socialLinks?: {
     facebook?: string;

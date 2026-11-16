@@ -16,6 +16,9 @@
 - Le formulaire de contact enregistre désormais les **membres** (prénom, nom, lieu d'habitation, téléphone, commentaire facultatif) dans l'onglet `Membres`, avec e-mail de notification.
 - Newsletter : suppression du champ « piège » invisible, qui pouvait bloquer l'envoi sans aucun message ; les erreurs affichent maintenant leur cause. Protection anti-abus déplacée côté script (30 envois/minute).
 
+## Relecture des textes
+Tous les titres et textes ont été relus (voir `docs/RELECTURE.md`, avant/après) : majuscules à la française, anglicismes, accords, espaces avant `: ? !`, apostrophes typographiques, « e-mail » unique, horaires présentés de la même façon, noms cohérents. Le texte de désabonnement newsletter est devenu exact.
+
 ## Sécurité et confidentialité
 - Suppression de la page `/admin` publique (appelait `/api/admin/...` qui n'existe pas, sans aucune authentification) et du code serveur mort (`shared/schema.ts`, Postgres/Drizzle non installé, incohérent avec le `.env` MySQL).
 - Suppression du script externe `replit-dev-banner.js` chargé en production, et de l'injection de Font Awesome depuis un CDN (remplacé par les icônes déjà présentes, `lucide-react`).

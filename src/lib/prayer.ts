@@ -44,7 +44,7 @@ function normalizeTime(value: unknown): string | null {
   return `${String(h).padStart(2, "0")}:${m[2]}`;
 }
 
-/** Extrait les 5 horaires d'une réponse de l'API Aladhan ; renvoie null si la réponse est inattendue. */
+/** Extrait les 5 horaires d’une réponse de l’API Aladhan ; renvoie null si la réponse est inattendue. */
 export function parseAladhanResponse(json: unknown): PrayerTimes | null {
   const timings = (json as { data?: { timings?: Record<string, unknown> } } | null)?.data?.timings;
   if (!timings || typeof timings !== "object") return null;
@@ -137,7 +137,7 @@ function minutesInDakar(now: Date): number {
   return h * 60 + m;
 }
 
-/** Prochaine prière (après Isha, c'est le Fajr du lendemain). */
+/** Prochaine prière (après Isha, c’est le Fajr du lendemain). */
 export function getNextPrayer(times: PrayerTimes, now: Date = new Date()): PrayerKey {
   const current = minutesInDakar(now);
   for (const key of PRAYER_ORDER) {

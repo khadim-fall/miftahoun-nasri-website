@@ -20,7 +20,7 @@ const HeroSection = () => (
             Découvrir
           </LinkButton>
           <LinkButton href="/contact" variant="white" className="px-8 text-lg font-bold">
-            Nous Contacter
+            Nous contacter
           </LinkButton>
         </div>
       </div>

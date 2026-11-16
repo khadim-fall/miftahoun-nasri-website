@@ -14,7 +14,7 @@ const phoneOk = (v: string) => /^\+?[0-9 ().-]+$/.test(v) && v.replace(/\D/g, ""
 const schema = z.object({
   firstName: z.string().trim().min(2, "Veuillez entrer votre prénom"),
   lastName: z.string().trim().min(2, "Veuillez entrer votre nom"),
-  residence: z.string().trim().min(2, "Veuillez indiquer votre lieu d'habitation"),
+  residence: z.string().trim().min(2, "Veuillez indiquer votre lieu d’habitation"),
   phone: z
     .string()
     .trim()
@@ -69,14 +69,14 @@ const ContactForm = () => {
         description:
           result === "sent"
             ? "Merci ! La dahira a bien reçu vos informations."
-            : "Votre application de messagerie s'ouvre : validez l'envoi du message pré-rempli.",
+            : "Votre application de messagerie s’ouvre : validez l’envoi du message pré-rempli.",
       });
       reset();
     } catch (error) {
       console.error(error);
       toast({
         title: "Erreur",
-        description: `L'envoi a échoué${error instanceof Error ? ` (${error.message})` : ""}. Veuillez réessayer.`,
+        description: `L’envoi a échoué${error instanceof Error ? ` (${error.message})` : ""}. Veuillez réessayer.`,
         variant: "destructive",
       });
     } finally {
@@ -111,8 +111,8 @@ const ContactForm = () => {
 
       <Field
         id="member-residence"
-        label="Lieu d'habitation"
-        hint="Quartier et ville, par exemple : Notaire, Guediawaye"
+        label="Lieu d’habitation"
+        hint="Quartier et ville, par exemple : Notaire, Guediawaye"
         error={errors.residence?.message}
       >
         <Input
@@ -149,7 +149,7 @@ const ContactForm = () => {
 
       <p className="text-xs text-gray-600">
         Ces informations sont utilisées uniquement par la dahira pour contacter ses membres. En envoyant ce
-        formulaire, vous acceptez qu'elles soient conservées à cet effet.
+        formulaire, vous acceptez qu’elles soient conservées à cet effet.
       </p>
 
       <Button
@@ -158,7 +158,7 @@ const ContactForm = () => {
         disabled={sending}
         className="bg-primary px-8 font-bold text-white hover:bg-primary-light"
       >
-        {sending ? "Envoi en cours..." : "Envoyer"}
+        {sending ? "Envoi en cours…" : "Envoyer mes informations"}
       </Button>
     </form>
   );

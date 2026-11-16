@@ -14,11 +14,13 @@ const Row = ({ icon, title, children }: { icon: React.ReactNode; title: string; 
   </div>
 );
 
+const hasSocial = Object.values(SITE.social).some(Boolean);
+
 const linkClass = "block text-gray-600 hover:text-primary hover:underline";
 
 const ContactInfo = ({ headingAs: Heading = "h3" }: { headingAs?: "h2" | "h3" }) => (
   <div>
-    <Heading className="mb-6 font-lora text-2xl font-semibold text-primary">Informations de Contact</Heading>
+    <Heading className="mb-6 font-lora text-2xl font-semibold text-primary">Coordonnées</Heading>
 
     <div className="space-y-6">
       <Row icon={<MapPin size={20} />} title="Adresse">
@@ -33,7 +35,7 @@ const ContactInfo = ({ headingAs: Heading = "h3" }: { headingAs?: "h2" | "h3" })
         ))}
       </Row>
 
-      <Row icon={<Mail size={20} />} title="Email">
+      <Row icon={<Mail size={20} />} title="E-mail">
         {SITE.emails.map((email) => (
           <a key={email} href={`mailto:${email}`} className={`${linkClass} break-all`}>
             {email}
@@ -41,7 +43,7 @@ const ContactInfo = ({ headingAs: Heading = "h3" }: { headingAs?: "h2" | "h3" })
         ))}
       </Row>
 
-      <Row icon={<Clock size={20} />} title="Heures d'ouverture">
+      <Row icon={<Clock size={20} />} title="Horaires des rencontres">
         {SITE.hours.map((h) => (
           <p key={h} className="text-gray-600">
             {h}
@@ -62,10 +64,12 @@ const ContactInfo = ({ headingAs: Heading = "h3" }: { headingAs?: "h2" | "h3" })
         </a>
       )}
 
-      <div className="mt-8">
-        <h4 className="mb-3 text-lg font-medium text-primary">Suivez-nous</h4>
-        <SocialLinks linkClassName="flex h-10 w-10 items-center justify-center rounded-full bg-primary text-white transition-colors duration-300 hover:bg-primary-light" />
-      </div>
+      {hasSocial && (
+        <div className="mt-8">
+          <h4 className="mb-3 text-lg font-medium text-primary">Suivez-nous</h4>
+          <SocialLinks linkClassName="flex h-10 w-10 items-center justify-center rounded-full bg-primary text-white transition-colors duration-300 hover:bg-primary-light" />
+        </div>
+      )}
     </div>
   </div>
 );

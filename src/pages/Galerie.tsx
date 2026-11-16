@@ -24,7 +24,7 @@ const Galerie = () => {
 
   return (
     <>
-      <PageHeader title="Galerie Photos" description="Découvrez les moments forts de la Dahira Miftahoun Nasri" />
+      <PageHeader title="Galerie photos" description="Découvrez les moments forts de la Dahira Miftahoun Nasri" />
 
       <section className="bg-gray-50 py-16">
         <div className="container mx-auto px-4">
@@ -112,7 +112,7 @@ const Galerie = () => {
 
       <section className="bg-white py-16">
         <div className="container mx-auto px-4">
-          <SectionHeading title="Nos Vidéos" description="Revivez nos événements à travers ces vidéos" />
+          <SectionHeading title="Nos vidéos" description="Revivez nos événements à travers ces vidéos" />
 
           <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
             {videos.map((video) => (
