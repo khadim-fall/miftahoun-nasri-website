@@ -31,19 +31,20 @@ Node.js 18 ou supérieur.
 
 Ils sont calculés chaque jour pour Dakar via l'API publique [Aladhan](https://aladhan.com) (mis en cache dans le navigateur). Si le calcul est indisponible, des valeurs *indicatives* sont affichées avec une mention. La méthode de calcul se règle dans `SITE.prayer.method` : comparez avec les horaires de votre mosquée de référence.
 
-## Formulaires : liste des abonnés et messages (Google Sheets, sans EmailJS)
+## Formulaires : membres et newsletter (Google Sheets)
 
-Les inscriptions à la newsletter et les messages de contact sont enregistrés dans **un Google Sheet qui vous appartient** (onglets `Newsletter` et `Messages`, doublons ignorés). Les messages de contact vous sont aussi envoyés par e-mail. Gratuit, sans service tiers.
+Les données sont enregistrées dans **un Google Sheet qui vous appartient**, via un Google Apps Script (`docs/google-apps-script.gs`) :
+- **Membres** : formulaire de la page Contact (prénom, nom, lieu d'habitation, téléphone, commentaire facultatif). Chaque nouveau membre vous est aussi envoyé par e-mail.
+- **Newsletter** : inscriptions de l'accueil (nom, e-mail), doublons ignorés.
+- **Messages** : ancien formulaire de contact, conservé.
 
-1. Créez un Google Sheet vide (avec le compte Gmail de la dahira), puis **Extensions > Apps Script**.
-2. Remplacez le code par le contenu de `docs/google-apps-script.gs` (vérifiez `NOTIFY_EMAIL`), puis enregistrez.
-3. **Déployer > Nouveau déploiement > Application Web** : *Exécuter en tant que* **Moi**, *Qui a accès* **Tout le monde**. Autorisez l'accès demandé par Google, puis copiez l'URL (elle finit par `/exec`).
-4. Collez cette URL dans `src/config/site.ts` (`formsEndpoint`), puis `npm run build` et republiez `dist/`.
-5. Testez : une inscription doit apparaître dans l'onglet `Newsletter`.
+Installation : Sheet > **Extensions > Apps Script**, collez le script, enregistrez, puis **Déployer > Nouveau déploiement > Application Web** (*Exécuter en tant que* Moi, *Accès* Tout le monde). Collez l'URL `/exec` dans `src/config/site.ts` (`formsEndpoint`).
 
-Après toute modification du script, faites *Déployer > Gérer les déploiements > Modifier > Nouvelle version*. Tant que `formsEndpoint` est vide, les formulaires ouvrent la messagerie du visiteur.
+**Mettre à jour le script** : après avoir collé une nouvelle version du code, faites *Déployer > Gérer les déploiements > (crayon) > Version : Nouvelle version > Déployer*. L'URL ne change pas. Ouvrir l'URL `/exec` dans un navigateur doit afficher `{"ok":true,...}`.
 
-Pour écrire à vos abonnés : copiez la colonne Email du Sheet et collez-la dans le champ **Cci** de Gmail (limite d'environ 500 envois par jour).
+En cas de problème : Apps Script > **Exécutions** affiche les erreurs de chaque envoi. Tant que `formsEndpoint` est vide, les formulaires ouvrent la messagerie du visiteur.
+
+Pour écrire à vos abonnés : copiez la colonne Email du Sheet dans le champ **Cci** de Gmail (environ 500 envois par jour).
 
 ## Déploiement
 

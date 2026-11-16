@@ -1,5 +1,5 @@
 import { SITE } from "@/config/site";
-import type { ContactFormData, NewsletterFormData } from "./types";
+import type { MemberFormData, NewsletterFormData } from "./types";
 
 /**
  * Envoi des formulaires vers un Google Sheet via un Google Apps Script (gratuit, sans service tiers).
@@ -45,11 +45,15 @@ export async function subscribeToNewsletter({ name, email }: NewsletterFormData)
   return "sent";
 }
 
-export async function sendContactMessage(data: ContactFormData): Promise<SubmitResult> {
+export async function sendMemberForm(data: MemberFormData): Promise<SubmitResult> {
   if (!SITE.formsEndpoint) {
-    openMailClient(data.subject, `${data.message}\n\n--\n${data.name} (${data.email})`);
+    openMailClient(
+      `Nouveau membre : ${data.firstName} ${data.lastName}`,
+      `Prénom : ${data.firstName}\nNom : ${data.lastName}\nLieu d'habitation : ${data.residence}\nTéléphone : ${data.phone}` +
+        (data.comment ? `\n\nCommentaire :\n${data.comment}` : ""),
+    );
     return "mailto";
   }
-  await postToScript({ type: "contact", ...data });
+  await postToScript({ type: "member", ...data, comment: data.comment ?? "" });
   return "sent";
 }

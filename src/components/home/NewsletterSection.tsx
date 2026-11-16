@@ -9,12 +9,10 @@ const NewsletterSection = () => {
   const { toast } = useToast();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [honeypot, setHoneypot] = useState("");
   const [sending, setSending] = useState(false);
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    if (honeypot) return; // robot : on ignore silencieusement
     if (!name.trim() || !email.trim()) {
       toast({
         title: "Erreur de validation",
@@ -39,7 +37,7 @@ const NewsletterSection = () => {
       console.error(error);
       toast({
         title: "Erreur",
-        description: "Une erreur est survenue lors de l'inscription. Veuillez réessayer.",
+        description: `L'inscription a échoué${error instanceof Error ? ` (${error.message})` : ""}. Veuillez réessayer.`,
         variant: "destructive",
       });
     } finally {
@@ -85,17 +83,6 @@ const NewsletterSection = () => {
                 required
               />
             </label>
-            {/* Champ piège anti-robots : invisible pour les humains */}
-            <div className="absolute -left-[9999px]" aria-hidden="true">
-              <input
-                type="text"
-                name="website"
-                tabIndex={-1}
-                autoComplete="off"
-                value={honeypot}
-                onChange={(e) => setHoneypot(e.target.value)}
-              />
-            </div>
             <button
               type="submit"
               className="rounded-md bg-gold px-6 py-3 font-bold text-dark transition-colors duration-300 hover:bg-gold-light disabled:opacity-60"

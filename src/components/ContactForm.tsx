@@ -6,23 +6,42 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
-import { sendContactMessage } from "@/lib/forms";
+import { sendMemberForm } from "@/lib/forms";
+
+// Numéros sénégalais ou étrangers : chiffres, espaces, +, -, ( ) ; entre 8 et 15 chiffres
+const phoneOk = (v: string) => /^\+?[0-9 ().-]+$/.test(v) && v.replace(/\D/g, "").length >= 8 && v.replace(/\D/g, "").length <= 15;
 
 const schema = z.object({
-  name: z.string().trim().min(2, "Le nom doit contenir au moins 2 caractères"),
-  email: z.string().trim().email("Veuillez entrer une adresse email valide"),
-  subject: z.string().trim().min(5, "Le sujet doit contenir au moins 5 caractères"),
-  message: z.string().trim().min(10, "Le message doit contenir au moins 10 caractères"),
-  website: z.string().max(0).optional(), // champ piège anti-robots
+  firstName: z.string().trim().min(2, "Veuillez entrer votre prénom"),
+  lastName: z.string().trim().min(2, "Veuillez entrer votre nom"),
+  residence: z.string().trim().min(2, "Veuillez indiquer votre lieu d'habitation"),
+  phone: z
+    .string()
+    .trim()
+    .refine(phoneOk, "Numéro invalide (ex. +221 77 000 00 00)"),
+  comment: z.string().trim().max(1000, "1000 caractères maximum").optional(),
 });
 type FormValues = z.infer<typeof schema>;
 
-const Field = ({ id, label, error, children }: { id: string; label: string; error?: string; children: React.ReactNode }) => (
+const Field = ({
+  id,
+  label,
+  error,
+  hint,
+  children,
+}: {
+  id: string;
+  label: string;
+  error?: string;
+  hint?: string;
+  children: React.ReactNode;
+}) => (
   <div>
     <label htmlFor={id} className="mb-1 block text-sm font-medium text-gray-700">
       {label}
     </label>
     {children}
+    {hint && !error && <p className="mt-1 text-xs text-gray-600">{hint}</p>}
     {error && (
       <p id={`${id}-error`} role="alert" className="mt-1 text-sm text-red-600">
         {error}
@@ -42,20 +61,14 @@ const ContactForm = () => {
   } = useForm<FormValues>({ resolver: zodResolver(schema) });
 
   const onSubmit = async (values: FormValues) => {
-    if (values.website) return; // robot
     setSending(true);
     try {
-      const result = await sendContactMessage({
-        name: values.name,
-        email: values.email,
-        subject: values.subject,
-        message: values.message,
-      });
+      const result = await sendMemberForm(values);
       toast({
-        title: result === "sent" ? "Message envoyé" : "Presque terminé",
+        title: result === "sent" ? "Informations enregistrées" : "Presque terminé",
         description:
           result === "sent"
-            ? "Nous vous répondrons dans les plus brefs délais."
+            ? "Merci ! La dahira a bien reçu vos informations."
             : "Votre application de messagerie s'ouvre : validez l'envoi du message pré-rempli.",
       });
       reset();
@@ -63,7 +76,7 @@ const ContactForm = () => {
       console.error(error);
       toast({
         title: "Erreur",
-        description: "Une erreur est survenue lors de l'envoi du message. Veuillez réessayer.",
+        description: `L'envoi a échoué${error instanceof Error ? ` (${error.message})` : ""}. Veuillez réessayer.`,
         variant: "destructive",
       });
     } finally {
@@ -76,56 +89,76 @@ const ContactForm = () => {
   return (
     <form onSubmit={handleSubmit(onSubmit)} noValidate className="space-y-5">
       <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
-        <Field id="contact-name" label="Nom" error={errors.name?.message}>
+        <Field id="member-firstname" label="Prénom" error={errors.firstName?.message}>
           <Input
-            id="contact-name"
-            autoComplete="name"
-            placeholder="Votre nom complet"
-            aria-invalid={!!errors.name}
-            aria-describedby={describe("contact-name", !!errors.name)}
-            {...register("name")}
+            id="member-firstname"
+            autoComplete="given-name"
+            aria-invalid={!!errors.firstName}
+            aria-describedby={describe("member-firstname", !!errors.firstName)}
+            {...register("firstName")}
           />
         </Field>
-        <Field id="contact-email" label="Email" error={errors.email?.message}>
+        <Field id="member-lastname" label="Nom" error={errors.lastName?.message}>
           <Input
-            id="contact-email"
-            type="email"
-            autoComplete="email"
-            placeholder="Votre adresse email"
-            aria-invalid={!!errors.email}
-            aria-describedby={describe("contact-email", !!errors.email)}
-            {...register("email")}
+            id="member-lastname"
+            autoComplete="family-name"
+            aria-invalid={!!errors.lastName}
+            aria-describedby={describe("member-lastname", !!errors.lastName)}
+            {...register("lastName")}
           />
         </Field>
       </div>
 
-      <Field id="contact-subject" label="Sujet" error={errors.subject?.message}>
+      <Field
+        id="member-residence"
+        label="Lieu d'habitation"
+        hint="Quartier et ville, par exemple : Notaire, Guediawaye"
+        error={errors.residence?.message}
+      >
         <Input
-          id="contact-subject"
-          placeholder="Sujet de votre message"
-          aria-invalid={!!errors.subject}
-          aria-describedby={describe("contact-subject", !!errors.subject)}
-          {...register("subject")}
+          id="member-residence"
+          autoComplete="address-level2"
+          aria-invalid={!!errors.residence}
+          aria-describedby={describe("member-residence", !!errors.residence)}
+          {...register("residence")}
         />
       </Field>
 
-      <Field id="contact-message" label="Message" error={errors.message?.message}>
+      <Field id="member-phone" label="Numéro de téléphone" error={errors.phone?.message}>
+        <Input
+          id="member-phone"
+          type="tel"
+          inputMode="tel"
+          autoComplete="tel"
+          placeholder="+221 77 000 00 00"
+          aria-invalid={!!errors.phone}
+          aria-describedby={describe("member-phone", !!errors.phone)}
+          {...register("phone")}
+        />
+      </Field>
+
+      <Field id="member-comment" label="Commentaire (facultatif)" error={errors.comment?.message}>
         <Textarea
-          id="contact-message"
-          rows={5}
-          placeholder="Votre message..."
-          aria-invalid={!!errors.message}
-          aria-describedby={describe("contact-message", !!errors.message)}
-          {...register("message")}
+          id="member-comment"
+          rows={4}
+          aria-invalid={!!errors.comment}
+          aria-describedby={describe("member-comment", !!errors.comment)}
+          {...register("comment")}
         />
       </Field>
 
-      <div className="absolute -left-[9999px]" aria-hidden="true">
-        <input type="text" tabIndex={-1} autoComplete="off" {...register("website")} />
-      </div>
+      <p className="text-xs text-gray-600">
+        Ces informations sont utilisées uniquement par la dahira pour contacter ses membres. En envoyant ce
+        formulaire, vous acceptez qu'elles soient conservées à cet effet.
+      </p>
 
-      <Button type="submit" size="lg" disabled={sending} className="bg-primary px-8 font-bold text-white hover:bg-primary-light">
-        {sending ? "Envoi en cours..." : "Envoyer le message"}
+      <Button
+        type="submit"
+        size="lg"
+        disabled={sending}
+        className="bg-primary px-8 font-bold text-white hover:bg-primary-light"
+      >
+        {sending ? "Envoi en cours..." : "Envoyer"}
       </Button>
     </form>
   );

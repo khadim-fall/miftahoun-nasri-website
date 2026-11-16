@@ -17,7 +17,10 @@ const Contact = () => {
         <div className="container mx-auto px-4 md:px-6">
           <div className="mx-auto grid max-w-5xl grid-cols-1 gap-12 lg:grid-cols-2">
             <div>
-              <h2 className="mb-6 font-lora text-2xl font-semibold text-primary">Envoyez-nous un message</h2>
+              <h2 className="mb-6 font-lora text-2xl font-semibold text-primary">Vos informations</h2>
+              <p className="mb-6 text-gray-600">
+                Membres de la dahira, renseignez vos coordonnées pour que nous puissions vous joindre.
+              </p>
               <ContactForm />
             </div>
             <ContactInfo headingAs="h2" />

@@ -63,11 +63,12 @@ export interface WeeklyDay {
   slots: WeeklySlot[];
 }
 
-export interface ContactFormData {
-  name: string;
-  email: string;
-  subject: string;
-  message: string;
+export interface MemberFormData {
+  firstName: string;
+  lastName: string;
+  residence: string;
+  phone: string;
+  comment?: string;
 }
 
 export interface NewsletterFormData {

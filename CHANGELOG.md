@@ -12,6 +12,10 @@
 - Liens de réseaux sociaux `href="#"` (renvoyaient en haut de page) → affichés seulement s'ils sont renseignés.
 - 3e responsable : la photo du bâtiment servait de portrait → initiales en attendant une vraie photo.
 
+## Formulaires (version Google Sheets)
+- Le formulaire de contact enregistre désormais les **membres** (prénom, nom, lieu d'habitation, téléphone, commentaire facultatif) dans l'onglet `Membres`, avec e-mail de notification.
+- Newsletter : suppression du champ « piège » invisible, qui pouvait bloquer l'envoi sans aucun message ; les erreurs affichent maintenant leur cause. Protection anti-abus déplacée côté script (30 envois/minute).
+
 ## Sécurité et confidentialité
 - Suppression de la page `/admin` publique (appelait `/api/admin/...` qui n'existe pas, sans aucune authentification) et du code serveur mort (`shared/schema.ts`, Postgres/Drizzle non installé, incohérent avec le `.env` MySQL).
 - Suppression du script externe `replit-dev-banner.js` chargé en production, et de l'injection de Font Awesome depuis un CDN (remplacé par les icônes déjà présentes, `lucide-react`).
