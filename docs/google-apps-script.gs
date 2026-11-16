@@ -1,7 +1,7 @@
 /**
  * Google Apps Script : reçoit les formulaires du site et les range dans le Google Sheet.
  *  - "Newsletter" : Date | Nom | Email          (abonnés, sans doublons)
- *  - "Membres"    : Date | Prénom | Nom | Lieu d'habitation | Téléphone | Commentaire
+ *  - "Membres"    : Date | Prénom | Nom | Lieu d'habitation | Téléphone | Commentaire (doublons refusés)
  *  - "Messages"   : ancien formulaire de contact (conservé pour compatibilité)
  * Chaque nouveau membre / message vous est aussi envoyé par e-mail.
  */
@@ -30,7 +30,8 @@ function doPost(e) {
       const emails = sheet.getLastRow() > 1
         ? sheet.getRange(2, 3, sheet.getLastRow() - 1, 1).getValues().flat().map(function (x) { return String(x).toLowerCase(); })
         : [];
-      if (emails.indexOf(email.toLowerCase()) === -1) sheet.appendRow([new Date(), name, email]);
+      if (emails.indexOf(email.toLowerCase()) !== -1) return reply({ ok: true, duplicate: true });
+      sheet.appendRow([new Date(), name, email]);
       return reply({ ok: true });
     }
 
@@ -44,7 +45,16 @@ function doPost(e) {
         return reply({ ok: false, error: "Données invalides" });
       }
       const sheet = getSheet(ss, "Membres", ["Date", "Prénom", "Nom", "Lieu d'habitation", "Téléphone", "Commentaire"]);
-      const row = sheet.getLastRow() + 1;
+      // Doublon : même prénom + même nom + même téléphone (les accents, majuscules et "+221" sont ignorés)
+      const key = memberKey(firstName, lastName, phone);
+      const last = sheet.getLastRow();
+      if (last > 1) {
+        const existing = sheet.getRange(2, 2, last - 1, 4).getValues(); // colonnes B à E
+        for (let i = 0; i < existing.length; i++) {
+          if (memberKey(existing[i][0], existing[i][1], existing[i][3]) === key) return reply({ ok: true, duplicate: true });
+        }
+      }
+      const row = last + 1;
       sheet.getRange(row, 5).setNumberFormat("@"); // le téléphone reste du texte (garde le "+")
       sheet.getRange(row, 1, 1, 6).setValues([[new Date(), firstName, lastName, residence, phone, comment]]);
       notify("[Site] Nouveau membre : " + firstName + " " + lastName,
@@ -73,6 +83,15 @@ function doPost(e) {
   } finally {
     lock.releaseLock();
   }
+}
+
+// Clé de comparaison d'un membre : prénom + nom sans accents ni majuscules + 9 derniers chiffres du téléphone
+function memberKey(firstName, lastName, phone) {
+  return [normalizeName(firstName), normalizeName(lastName), String(phone).replace(/\D/g, "").slice(-9)].join("|");
+}
+
+function normalizeName(s) {
+  return String(s).normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
 }
 
 function isEmail(s) {

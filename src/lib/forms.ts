@@ -5,11 +5,12 @@ import type { MemberFormData, NewsletterFormData } from "./types";
  * Envoi des formulaires vers un Google Sheet via un Google Apps Script (gratuit, sans service tiers).
  * Si SITE.formsEndpoint est vide, on ouvre la messagerie du visiteur (rien n’est faussement "envoyé").
  */
-export type SubmitResult = "sent" | "mailto";
+export type SubmitResult = "sent" | "duplicate" | "mailto";
 
 let lastSent = 0;
 
-async function postToScript(payload: Record<string, string>): Promise<void> {
+/** Renvoie true si le script a signalé que ces informations existaient déjà (rien n’a été ajouté). */
+async function postToScript(payload: Record<string, string>): Promise<boolean> {
   const now = Date.now();
   if (now - lastSent < 10_000) throw new Error("Veuillez patienter quelques secondes.");
 
@@ -23,9 +24,10 @@ async function postToScript(payload: Record<string, string>): Promise<void> {
       body: JSON.stringify(payload),
       signal: controller.signal,
     });
-    const json = (await res.json().catch(() => null)) as { ok?: boolean; error?: string } | null;
+    const json = (await res.json().catch(() => null)) as { ok?: boolean; duplicate?: boolean; error?: string } | null;
     if (!res.ok || !json?.ok) throw new Error(json?.error || `HTTP ${res.status}`);
     lastSent = Date.now();
+    return json.duplicate === true;
   } finally {
     clearTimeout(timer);
   }
@@ -41,8 +43,8 @@ export async function subscribeToNewsletter({ name, email }: NewsletterFormData)
     openMailClient("Inscription à la newsletter", `Bonjour,\n\nJe souhaite recevoir la newsletter.\n\nNom : ${name}\nEmail : ${email}`);
     return "mailto";
   }
-  await postToScript({ type: "newsletter", name, email });
-  return "sent";
+  const duplicate = await postToScript({ type: "newsletter", name, email });
+  return duplicate ? "duplicate" : "sent";
 }
 
 export async function sendMemberForm(data: MemberFormData): Promise<SubmitResult> {
@@ -54,6 +56,6 @@ export async function sendMemberForm(data: MemberFormData): Promise<SubmitResult
     );
     return "mailto";
   }
-  await postToScript({ type: "member", ...data, comment: data.comment ?? "" });
-  return "sent";
+  const duplicate = await postToScript({ type: "member", ...data, comment: data.comment ?? "" });
+  return duplicate ? "duplicate" : "sent";
 }

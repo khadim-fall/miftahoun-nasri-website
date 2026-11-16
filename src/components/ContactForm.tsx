@@ -64,13 +64,12 @@ const ContactForm = () => {
     setSending(true);
     try {
       const result = await sendMemberForm(values);
-      toast({
-        title: result === "sent" ? "Informations enregistrées" : "Presque terminé",
-        description:
-          result === "sent"
-            ? "Merci ! La dahira a bien reçu vos informations."
-            : "Votre application de messagerie s’ouvre : validez l’envoi du message pré-rempli.",
-      });
+      const messages = {
+        sent: { title: "Informations enregistrées", description: "Merci ! La dahira a bien reçu vos informations." },
+        duplicate: { title: "Déjà enregistré", description: "Vous êtes déjà enregistré(e) avec ce nom et ce numéro de téléphone. Merci !" },
+        mailto: { title: "Presque terminé", description: "Votre application de messagerie s’ouvre : validez l’envoi du message pré-rempli." },
+      };
+      toast(messages[result]);
       reset();
     } catch (error) {
       console.error(error);

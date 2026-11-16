@@ -24,13 +24,12 @@ const NewsletterSection = () => {
     setSending(true);
     try {
       const result = await subscribeToNewsletter({ name: name.trim(), email: email.trim() });
-      toast({
-        title: result === "sent" ? "Inscription réussie" : "Presque terminé",
-        description:
-          result === "sent"
-            ? "Merci ! Vous recevrez bientôt nos actualités."
-            : "Votre application de messagerie s’ouvre : validez l’envoi du message pré-rempli.",
-      });
+      const messages = {
+        sent: { title: "Inscription réussie", description: "Merci ! Vous recevrez bientôt nos actualités." },
+        duplicate: { title: "Déjà inscrit", description: "Cette adresse e-mail est déjà inscrite à la newsletter." },
+        mailto: { title: "Presque terminé", description: "Votre application de messagerie s’ouvre : validez l’envoi du message pré-rempli." },
+      };
+      toast(messages[result]);
       setName("");
       setEmail("");
     } catch (error) {

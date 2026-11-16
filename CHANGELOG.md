@@ -19,6 +19,8 @@
 ## Relecture des textes
 Tous les titres et textes ont été relus (voir `docs/RELECTURE.md`, avant/après) : majuscules à la française, anglicismes, accords, espaces avant `: ? !`, apostrophes typographiques, « e-mail » unique, horaires présentés de la même façon, noms cohérents. Le texte de désabonnement newsletter est devenu exact.
 
+- Doublons refusés : un membre déjà enregistré (même prénom + nom + téléphone, sans tenir compte des accents, majuscules ni du « +221 ») n'est plus ajouté et reçoit le message « Déjà enregistré » ; idem « Déjà inscrit » pour la newsletter.
+
 ## Sécurité et confidentialité
 - Suppression de la page `/admin` publique (appelait `/api/admin/...` qui n'existe pas, sans aucune authentification) et du code serveur mort (`shared/schema.ts`, Postgres/Drizzle non installé, incohérent avec le `.env` MySQL).
 - Suppression du script externe `replit-dev-banner.js` chargé en production, et de l'injection de Font Awesome depuis un CDN (remplacé par les icônes déjà présentes, `lucide-react`).
