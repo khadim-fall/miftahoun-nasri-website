@@ -34,7 +34,8 @@ Ils sont calculés chaque jour pour Dakar via l'API publique [Aladhan](https://a
 ## Formulaires : membres et newsletter (Google Sheets)
 
 Les données sont enregistrées dans **un Google Sheet qui vous appartient**, via un Google Apps Script (`docs/google-apps-script.gs`) :
-- **Membres** : formulaire de la page Contact (prénom, nom, lieu d'habitation, téléphone, commentaire facultatif). Chaque nouveau membre vous est aussi envoyé par e-mail.
+- **Membres** : formulaire de la page Contact (prénom, nom, lieu d'habitation, secteur, téléphone, commentaire facultatif). Les doublons (même prénom + nom + téléphone) sont refusés.
+- **Secteurs** : onglet de synthèse qui compte automatiquement les membres par secteur. Chaque nouveau membre vous est aussi envoyé par e-mail.
 - **Newsletter** : inscriptions de l'accueil (nom, e-mail), doublons ignorés.
 - **Messages** : ancien formulaire de contact, conservé.
 
@@ -46,9 +47,15 @@ En cas de problème : Apps Script > **Exécutions** affiche les erreurs de chaqu
 
 Pour écrire à vos abonnés : copiez la colonne Email du Sheet dans le champ **Cci** de Gmail (environ 500 envois par jour).
 
-## Déploiement
+### Secteurs de la dahira
 
-Publiez le contenu de `dist/` après `npm run build`. Le site utilise des adresses du type `/contact` : l'hébergeur doit renvoyer toutes les adresses vers `index.html`. Deux fichiers sont fournis dans `public/` (supprimez celui qui ne vous sert pas) : `_redirects` (Netlify, Cloudflare Pages) et `.htaccess` (Apache).
+Renseignez les noms des secteurs dans `src/config/site.ts` (`sectors: ["Secteur 1", "Secteur 2", ...]`) : le formulaire affiche alors un menu déroulant, ce qui évite les fautes de frappe et garantit des totaux justes. Tant que la liste est vide, le membre écrit son secteur librement (les totaux risquent alors d'être éclatés : « Secteur 1 » et « secteur1 » comptés à part).
+
+## Déploiement (Vercel)
+
+Le dépôt GitHub est relié à Vercel : chaque `git push` reconstruit et publie le site (Vercel lance `npm run build` lui-même, inutile de committer `dist/`).
+
+Le fichier `vercel.json` renvoie toutes les adresses (`/contact`, `/galerie`...) vers l'application. Sans lui, rafraîchir une page autre que l'accueil affiche « 404 NOT_FOUND ». Si vous changez d'hébergeur : Netlify/Cloudflare Pages utilisent un fichier `public/_redirects` contenant `/*  /index.html  200`, et Apache un `.htaccess` de réécriture vers `index.html`.
 
 ## Structure
 

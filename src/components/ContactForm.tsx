@@ -5,6 +5,8 @@ import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { SITE } from "@/config/site";
+import { cn } from "@/lib/utils";
 import { useToast } from "@/hooks/use-toast";
 import { sendMemberForm } from "@/lib/forms";
 
@@ -15,6 +17,7 @@ const schema = z.object({
   firstName: z.string().trim().min(2, "Veuillez entrer votre prénom"),
   lastName: z.string().trim().min(2, "Veuillez entrer votre nom"),
   residence: z.string().trim().min(2, "Veuillez indiquer votre lieu d’habitation"),
+  sector: z.string().trim().min(1, "Veuillez indiquer votre secteur"),
   phone: z
     .string()
     .trim()
@@ -22,6 +25,9 @@ const schema = z.object({
   comment: z.string().trim().max(1000, "1000 caractères maximum").optional(),
 });
 type FormValues = z.infer<typeof schema>;
+
+const selectClass =
+  "flex h-10 w-full rounded-md border border-input px-3 py-2 text-base ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm";
 
 const Field = ({
   id,
@@ -121,6 +127,36 @@ const ContactForm = () => {
           aria-describedby={describe("member-residence", !!errors.residence)}
           {...register("residence")}
         />
+      </Field>
+
+      <Field id="member-sector" label="Secteur" error={errors.sector?.message}>
+        {SITE.sectors.length > 0 ? (
+          <select
+            id="member-sector"
+            defaultValue=""
+            aria-invalid={!!errors.sector}
+            aria-describedby={describe("member-sector", !!errors.sector)}
+            className={cn(selectClass, "bg-background")}
+            {...register("sector")}
+          >
+            <option value="" disabled>
+              Choisissez votre secteur
+            </option>
+            {SITE.sectors.map((sector) => (
+              <option key={sector} value={sector}>
+                {sector}
+              </option>
+            ))}
+          </select>
+        ) : (
+          <Input
+            id="member-sector"
+            placeholder="Nom de votre secteur"
+            aria-invalid={!!errors.sector}
+            aria-describedby={describe("member-sector", !!errors.sector)}
+            {...register("sector")}
+          />
+        )}
       </Field>
 
       <Field id="member-phone" label="Numéro de téléphone" error={errors.phone?.message}>

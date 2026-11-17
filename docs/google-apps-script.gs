@@ -1,7 +1,7 @@
 /**
  * Google Apps Script : reçoit les formulaires du site et les range dans le Google Sheet.
  *  - "Newsletter" : Date | Nom | Email          (abonnés, sans doublons)
- *  - "Membres"    : Date | Prénom | Nom | Lieu d'habitation | Téléphone | Commentaire (doublons refusés)
+ *  - "Membres"    : Date | Prénom | Nom | Lieu d'habitation | Téléphone | Commentaire | Secteur (doublons refusés)
  *  - "Messages"   : ancien formulaire de contact (conservé pour compatibilité)
  * Chaque nouveau membre / message vous est aussi envoyé par e-mail.
  */
@@ -27,8 +27,9 @@ function doPost(e) {
       const email = clean(data.email, 150);
       if (!name || !isEmail(email)) return reply({ ok: false, error: "Données invalides" });
       const sheet = getSheet(ss, "Newsletter", ["Date", "Nom", "Email"]);
-      const emails = sheet.getLastRow() > 1
-        ? sheet.getRange(2, 3, sheet.getLastRow() - 1, 1).getValues().flat().map(function (x) { return String(x).toLowerCase(); })
+      const lastNews = lastDataRow(sheet, 3);
+      const emails = lastNews > 1
+        ? sheet.getRange(2, 3, lastNews - 1, 1).getValues().flat().map(function (x) { return String(x).toLowerCase(); })
         : [];
       if (emails.indexOf(email.toLowerCase()) !== -1) return reply({ ok: true, duplicate: true });
       sheet.appendRow([new Date(), name, email]);
@@ -41,13 +42,14 @@ function doPost(e) {
       const residence = clean(data.residence, 150);
       const phone = String(data.phone == null ? "" : data.phone).trim().slice(0, 25);
       const comment = clean(data.comment, 1000);
+      const sector = clean(data.sector, 80); // facultatif côté script : le site impose le choix
       if (!firstName || !lastName || !residence || !/^\+?[0-9 ().-]{8,25}$/.test(phone)) {
         return reply({ ok: false, error: "Données invalides" });
       }
-      const sheet = getSheet(ss, "Membres", ["Date", "Prénom", "Nom", "Lieu d'habitation", "Téléphone", "Commentaire"]);
+      const sheet = getSheet(ss, "Membres", ["Date", "Prénom", "Nom", "Lieu d'habitation", "Téléphone", "Commentaire", "Secteur"]);
       // Doublon : même prénom + même nom + même téléphone (les accents, majuscules et "+221" sont ignorés)
       const key = memberKey(firstName, lastName, phone);
-      const last = sheet.getLastRow();
+      const last = lastDataRow(sheet, 2); // dernière ligne remplie de la colonne Prénom
       if (last > 1) {
         const existing = sheet.getRange(2, 2, last - 1, 4).getValues(); // colonnes B à E
         for (let i = 0; i < existing.length; i++) {
@@ -56,10 +58,10 @@ function doPost(e) {
       }
       const row = last + 1;
       sheet.getRange(row, 5).setNumberFormat("@"); // le téléphone reste du texte (garde le "+")
-      sheet.getRange(row, 1, 1, 6).setValues([[new Date(), firstName, lastName, residence, phone, comment]]);
+      sheet.getRange(row, 1, 1, 7).setValues([[new Date(), firstName, lastName, residence, phone, comment, sector]]);
       notify("[Site] Nouveau membre : " + firstName + " " + lastName,
         "Prénom : " + firstName + "\nNom : " + lastName + "\nLieu d'habitation : " + residence +
-        "\nTéléphone : " + phone + (comment ? "\n\nCommentaire :\n" + comment : ""));
+        "\nSecteur : " + (sector || "non précisé") + "\nTéléphone : " + phone + (comment ? "\n\nCommentaire :\n" + comment : ""));
       return reply({ ok: true });
     }
 
@@ -92,6 +94,13 @@ function memberKey(firstName, lastName, phone) {
 
 function normalizeName(s) {
   return String(s).normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
+}
+
+// Dernière ligne non vide d'une colonne (ne dépend pas des tableaux ou totaux placés ailleurs dans la feuille)
+function lastDataRow(sheet, col) {
+  const values = sheet.getRange(1, col, sheet.getMaxRows(), 1).getValues();
+  for (let i = values.length - 1; i >= 0; i--) if (values[i][0] !== "") return i + 1;
+  return 1;
 }
 
 function isEmail(s) {

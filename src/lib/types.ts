@@ -68,6 +68,7 @@ export interface MemberFormData {
   lastName: string;
   residence: string;
   phone: string;
+  sector: string;
   comment?: string;
 }
 

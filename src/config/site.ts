@@ -46,6 +46,12 @@ export const SITE = {
   formsEndpoint:
     "https://script.google.com/macros/s/AKfycbxyvcf9EvYsuUoWlUsqE-G6WHluoneYs4Fr99IoDICr4iqX33SB-fSpJHbykeStv76-/exec",
 
+  /**
+   * Secteurs de la dahira. Renseignez ici leurs noms (ex. ["Secteur 1", "Secteur 2"]) : le formulaire
+   * affichera alors un menu déroulant. Tant que la liste est vide, le membre saisit son secteur librement.
+   */
+  sectors: [] as string[],
+
   mapEmbedUrl:
     "https://www.google.com/maps/embed?pb=!4v1748543030523!6m8!1m7!1s6CYDT6qZPwPFkz9dfcBT4A!2m2!1d14.7742005239495!2d-17.38952665254646!3f19.8893690421542!4f-0.7589820127834912!5f2.071032434232568",
 

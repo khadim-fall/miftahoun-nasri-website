@@ -51,7 +51,7 @@ export async function sendMemberForm(data: MemberFormData): Promise<SubmitResult
   if (!SITE.formsEndpoint) {
     openMailClient(
       `Nouveau membre : ${data.firstName} ${data.lastName}`,
-      `Prénom : ${data.firstName}\nNom : ${data.lastName}\nLieu d’habitation : ${data.residence}\nTéléphone : ${data.phone}` +
+      `Prénom : ${data.firstName}\nNom : ${data.lastName}\nLieu d’habitation : ${data.residence}\nSecteur : ${data.sector}\nTéléphone : ${data.phone}` +
         (data.comment ? `\n\nCommentaire :\n${data.comment}` : ""),
     );
     return "mailto";

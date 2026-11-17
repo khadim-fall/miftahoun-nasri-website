@@ -21,6 +21,10 @@ Tous les titres et textes ont été relus (voir `docs/RELECTURE.md`, avant/aprè
 
 - Doublons refusés : un membre déjà enregistré (même prénom + nom + téléphone, sans tenir compte des accents, majuscules ni du « +221 ») n'est plus ajouté et reçoit le message « Déjà enregistré » ; idem « Déjà inscrit » pour la newsletter.
 
+- `vercel.json` ajouté : rafraîchir ou ouvrir directement `/contact`, `/galerie`... ne provoque plus l'erreur « 404 NOT_FOUND » de Vercel.
+
+- Champ **Secteur** ajouté au formulaire des membres (menu déroulant via `SITE.sectors`), colonne `Secteur` dans le Sheet et onglet `Secteurs` avec le nombre de membres par secteur.
+
 ## Sécurité et confidentialité
 - Suppression de la page `/admin` publique (appelait `/api/admin/...` qui n'existe pas, sans aucune authentification) et du code serveur mort (`shared/schema.ts`, Postgres/Drizzle non installé, incohérent avec le `.env` MySQL).
 - Suppression du script externe `replit-dev-banner.js` chargé en production, et de l'injection de Font Awesome depuis un CDN (remplacé par les icônes déjà présentes, `lucide-react`).
