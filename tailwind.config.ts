@@ -12,6 +12,16 @@ export default {
       fontFamily: {
         lora: ["Lora", "serif"],
       },
+      keyframes: {
+        // la piste contient deux séries identiques : -50% -> 0 la fait défiler vers la droite sans coupure
+        "marquee-right": {
+          from: { transform: "translateX(-50%)" },
+          to: { transform: "translateX(0)" },
+        },
+      },
+      animation: {
+        "marquee-right": "marquee-right 45s linear infinite",
+      },
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
@@ -40,6 +50,7 @@ export default {
           dark: color("--gold-dark"),
         },
         dark: color("--dark"),
+        paper: color("--paper"),
       },
     },
   },

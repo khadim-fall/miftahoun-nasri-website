@@ -51,6 +51,10 @@ Pour écrire à vos abonnés : copiez la colonne Email du Sheet dans le champ **
 
 Renseignez les noms des secteurs dans `src/config/site.ts` (`sectors: ["Secteur 1", "Secteur 2", ...]`) : le formulaire affiche alors un menu déroulant, ce qui évite les fautes de frappe et garantit des totaux justes. Tant que la liste est vide, le membre écrit son secteur librement (les totaux risquent alors d'être éclatés : « Secteur 1 » et « secteur1 » comptés à part).
 
+### Bande du vers défilante
+
+Le vers, son image et sa traduction se modifient dans `src/components/home/VerseBanner.tsx` (constante `VERSE`). La vitesse se règle dans `tailwind.config.ts` (`marquee-right`, 45 s par cycle : plus petit = plus rapide). Pour changer d'image, remplacez `public/images/verset.webp` et ajustez `width` / `height`.
+
 ### Fenêtre de bienvenue
 
 Réglages dans `src/components/WelcomePopup.tsx` (`SHOW_AFTER_MS` : délai avant affichage) et `src/lib/welcome.ts` (`REPEAT_AFTER_DAYS` : nombre de jours avant de la réafficher après fermeture). Pour la tester à nouveau : navigation privée, ou vider `localStorage` (clé `dahira:welcome:v1`).
