@@ -1,5 +1,4 @@
 import HeroSection from "@/components/home/HeroSection";
-import VerseBanner from "@/components/home/VerseBanner";
 import PrayerTimes from "@/components/home/PrayerTimes";
 import JoinSection from "@/components/home/JoinSection";
 import AboutSection from "@/components/home/AboutSection";
@@ -16,7 +15,6 @@ const Home = () => {
   return (
     <>
       <HeroSection />
-      <VerseBanner />
       <PrayerTimes />
       <JoinSection />
       <AboutSection />

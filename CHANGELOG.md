@@ -31,7 +31,7 @@ Tous les titres et textes ont été relus (voir `docs/RELECTURE.md`, avant/aprè
 - Le formulaire est directement visible sur l'accueil (section « Rejoignez la dahira », avec la liste des secteurs), en plus de la page Contact.
 
 ## Bande du vers défilante
-Sous la bannière d'accueil : le vers en calligraphie (image `public/images/verset.webp`, deuxième ligne retirée) défile de gauche à droite en boucle, avec sa traduction en dessous. Bouton pause, pause au survol, et image immobile si le visiteur a demandé de réduire les animations.
+Dans la bannière d'accueil, entre le texte de présentation et les boutons : le vers en calligraphie (image `public/images/verset.webp`, deuxième ligne retirée) défile de gauche à droite en boucle, avec sa traduction en dessous. Bouton pause, pause au survol, et image immobile si le visiteur a demandé de réduire les animations.
 
 ## Sécurité et confidentialité
 - Suppression de la page `/admin` publique (appelait `/api/admin/...` qui n'existe pas, sans aucune authentification) et du code serveur mort (`shared/schema.ts`, Postgres/Drizzle non installé, incohérent avec le `.env` MySQL).

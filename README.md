@@ -53,7 +53,7 @@ Renseignez les noms des secteurs dans `src/config/site.ts` (`sectors: ["Secteur 
 
 ### Bande du vers défilante
 
-Le vers, son image et sa traduction se modifient dans `src/components/home/VerseBanner.tsx` (constante `VERSE`). La vitesse se règle dans `tailwind.config.ts` (`marquee-right`, 45 s par cycle : plus petit = plus rapide). Pour changer d'image, remplacez `public/images/verset.webp` et ajustez `width` / `height`.
+Elle se trouve dans la bannière d'accueil (`HeroSection.tsx`), entre la présentation et les boutons. Le vers, son image et sa traduction se modifient dans `src/components/home/VerseBanner.tsx` (constante `VERSE`). La vitesse se règle dans `tailwind.config.ts` (`marquee-right`, 45 s par cycle : plus petit = plus rapide). Pour changer d'image, remplacez `public/images/verset.webp` et ajustez `width` / `height`.
 
 ### Fenêtre de bienvenue
 
