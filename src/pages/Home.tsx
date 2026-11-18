@@ -1,5 +1,6 @@
 import HeroSection from "@/components/home/HeroSection";
 import PrayerTimes from "@/components/home/PrayerTimes";
+import JoinSection from "@/components/home/JoinSection";
 import AboutSection from "@/components/home/AboutSection";
 import LeadershipSection from "@/components/home/LeadershipSection";
 import ActivitiesSection from "@/components/home/ActivitiesSection";
@@ -15,6 +16,7 @@ const Home = () => {
     <>
       <HeroSection />
       <PrayerTimes />
+      <JoinSection />
       <AboutSection />
       <LeadershipSection />
       <ActivitiesSection />

@@ -1,4 +1,5 @@
 import { SITE } from "@/config/site";
+import JoinLink from "@/components/JoinLink";
 import LinkButton from "@/components/LinkButton";
 
 const HeroSection = () => (
@@ -16,11 +17,11 @@ const HeroSection = () => (
         <h1 className="mb-4 font-lora text-4xl font-bold md:text-6xl">{SITE.name}</h1>
         <p className="mx-auto mb-8 max-w-3xl text-xl md:text-2xl">{SITE.tagline}</p>
         <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
-          <LinkButton href="/a-propos" variant="gold" className="px-8 text-lg font-bold">
+          <JoinLink className="inline-flex items-center justify-center rounded-md bg-gold px-8 py-3 text-lg font-bold text-dark transition-colors duration-300 hover:bg-gold-light">
+            Rejoindre la dahira
+          </JoinLink>
+          <LinkButton href="/a-propos" variant="white" className="px-8 text-lg font-bold">
             Découvrir
-          </LinkButton>
-          <LinkButton href="/contact" variant="white" className="px-8 text-lg font-bold">
-            Nous contacter
           </LinkButton>
         </div>
       </div>

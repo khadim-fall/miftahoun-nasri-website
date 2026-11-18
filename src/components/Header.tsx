@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useLocation } from "wouter";
 import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
+import JoinLink from "./JoinLink";
 
 const navLinks = [
   { path: "/", label: "Accueil" },
@@ -47,7 +48,7 @@ const Header = () => {
             <span className="text-gold">Dahira Miftahoun</span> Nasri
           </Link>
 
-          <nav aria-label="Navigation principale" className="hidden space-x-8 md:flex">
+          <nav aria-label="Navigation principale" className="hidden items-center space-x-8 md:flex">
             {navLinks.map((link) => (
               <Link
                 key={link.path}
@@ -58,6 +59,11 @@ const Header = () => {
                 {link.label}
               </Link>
             ))}
+            {location !== "/contact" && (
+              <JoinLink className="rounded-md bg-gold px-4 py-2 font-bold text-dark transition-colors hover:bg-gold-light">
+                Rejoindre
+              </JoinLink>
+            )}
           </nav>
 
           <button
@@ -89,6 +95,13 @@ const Header = () => {
                   </Link>
                 </li>
               ))}
+              {location !== "/contact" && (
+                <li className="pt-3">
+                  <JoinLink className="block rounded-md bg-gold px-4 py-3 text-center font-bold text-dark hover:bg-gold-light">
+                    Rejoindre la dahira
+                  </JoinLink>
+                </li>
+              )}
             </ul>
           </nav>
         )}

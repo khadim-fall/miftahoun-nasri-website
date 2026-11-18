@@ -9,6 +9,7 @@ import { SITE } from "@/config/site";
 import { cn } from "@/lib/utils";
 import { useToast } from "@/hooks/use-toast";
 import { sendMemberForm } from "@/lib/forms";
+import { markRegistered } from "@/lib/welcome";
 
 // Numéros sénégalais ou étrangers : chiffres, espaces, +, -, ( ) ; entre 8 et 15 chiffres
 const phoneOk = (v: string) => /^\+?[0-9 ().-]+$/.test(v) && v.replace(/\D/g, "").length >= 8 && v.replace(/\D/g, "").length <= 15;
@@ -76,6 +77,7 @@ const ContactForm = () => {
         mailto: { title: "Presque terminé", description: "Votre application de messagerie s’ouvre : validez l’envoi du message pré-rempli." },
       };
       toast(messages[result]);
+      if (result !== "mailto") markRegistered();
       reset();
     } catch (error) {
       console.error(error);

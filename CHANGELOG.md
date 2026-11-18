@@ -25,6 +25,11 @@ Tous les titres et textes ont été relus (voir `docs/RELECTURE.md`, avant/aprè
 
 - Champ **Secteur** ajouté au formulaire des membres (menu déroulant via `SITE.sectors`), colonne `Secteur` dans le Sheet et onglet `Secteurs` avec le nombre de membres par secteur.
 
+## Invitation à rejoindre la dahira
+- Fenêtre de bienvenue (une seule fois, ~3,5 s après l'arrivée) : « Je m'enregistre » mène au formulaire. Fermée, elle ne revient pas pendant 7 jours ; après une inscription, plus jamais. Jamais affichée sur la page Contact.
+- Bouton doré « Rejoindre » dans l'en-tête (menu mobile : « Rejoindre la dahira ») et bouton principal dans la bannière d'accueil.
+- Le formulaire est directement visible sur l'accueil (section « Rejoignez la dahira », avec la liste des secteurs), en plus de la page Contact.
+
 ## Sécurité et confidentialité
 - Suppression de la page `/admin` publique (appelait `/api/admin/...` qui n'existe pas, sans aucune authentification) et du code serveur mort (`shared/schema.ts`, Postgres/Drizzle non installé, incohérent avec le `.env` MySQL).
 - Suppression du script externe `replit-dev-banner.js` chargé en production, et de l'injection de Font Awesome depuis un CDN (remplacé par les icônes déjà présentes, `lucide-react`).

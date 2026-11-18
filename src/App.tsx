@@ -5,6 +5,7 @@ import NotFound from "@/pages/not-found";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import BackToTop from "./components/BackToTop";
+import WelcomePopup from "./components/WelcomePopup";
 import Home from "./pages/Home";
 import AboutUs from "./pages/AboutUs";
 import Activites from "./pages/Activites";
@@ -47,6 +48,7 @@ function App() {
         </main>
         <Footer />
         <BackToTop />
+        <WelcomePopup />
       </div>
     </>
   );
